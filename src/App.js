@@ -1163,6 +1163,8 @@ class App extends Component {
       currentRiser: currentRiserObject
     })
 
+    this.update();
+
     console.log(this.state);
   }
 
@@ -1177,6 +1179,8 @@ class App extends Component {
     this.setState({
       currentRiser: currentRiserObject
     })
+
+    this.update();
 
     console.log(this.state);
   }
