@@ -5,6 +5,8 @@ import EditorLabel from "./EditorLabel";
 import ToolbarButtonWrapper from "./ToolbarButtonWrapper";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
+import "./Toolbar.css";
+
 class Toolbar extends Component {
 
   render() {
@@ -22,9 +24,7 @@ class Toolbar extends Component {
         >
           <IoIosArrowRoundBack />
         </Button>
-        <EditorLabel 
-          label={label}
-        />
+        <p className="toolbar__label">P {label}</p>
         <ToolbarButtonWrapper 
           addFloorBelow={addFloorBelow}
           addFloorAbove={addFloorAbove}

@@ -20,24 +20,7 @@ class LabelBottom extends Component {
       showForm,
       riserLabel
     } = this.props;
-    let form;
-    let text;
-    if(riserLabel === '') {
-      form = (
-        <LabelForm 
-          handleRiserFormSubmit={handleRiserFormSubmit}
-          handleRiserFormChange={handleRiserFormChange}
-        />
-      );
-      text = null;
-    } else {
-      form = null;
-      text = (
-        <LabelBottomText 
-          riserLabel={riserLabel} 
-        />
-      );
-    }
+    
     return (
       <div className="label__half label__half--bottom">
         {text}

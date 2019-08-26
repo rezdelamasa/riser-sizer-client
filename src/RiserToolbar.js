@@ -3,6 +3,8 @@ import Label from "./Label";
 import RiserInfo from "./RiserInfo";
 import Button from "./Button";
 
+import "./RiserToolbar.css";
+
 class RiserToolbar extends Component {
   render() {
     const {
@@ -22,15 +24,6 @@ class RiserToolbar extends Component {
           showForm={showForm}
           riserLabel={riserLabel}
         />
-        <RiserInfo 
-          riser={riser}
-        />
-        <Button
-          className={'button--edit'}
-          onClick={(e, id) => {editRiser(e, {riserLabel})}}
-        >
-          Edit
-        </Button>
       </div>
     );
   }

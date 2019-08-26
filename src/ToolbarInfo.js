@@ -21,7 +21,6 @@ class ToolbarInfo extends Component {
       <div className="toolbar__info">
         <p className="toolbar__info__text toolbar__info__text--cold">{totalColdFU.toFixed(1)}</p>
         <p className="toolbar__info__text toolbar__info__text--hot">{totalHotFU.toFixed(1)}</p>
-        <p className="toolbar__info__text toolbar__info__text--total">{totalBothFU.toFixed(1)}</p>
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import FloorFixture from "./FloorFixture";
 
+import "./FloorFixtureList.css";
+
 class FloorFixtureList extends Component {
 
   render() {

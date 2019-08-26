@@ -1,0 +1,6 @@
+.riser-item__info {
+	width: 100%;
+	flex-grow: 1;
+	box-sizing: border-box;
+	padding: 20px 0;
+}

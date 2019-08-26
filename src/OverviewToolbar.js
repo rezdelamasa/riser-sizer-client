@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ToolbarButtons from "./ToolbarButtons";
 
+import "./OverviewToolbar.css";
+
 class OverviewToolbar extends Component {
 
   render() {

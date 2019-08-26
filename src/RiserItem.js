@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import RiserToolbar from "./RiserToolbar";
-import RiserHelper from "./RiserHelper";
+import RiserInfo from "./RiserInfo";
+
+import "./RiserItem.css";
 
 class RiserItem extends Component {
 
@@ -46,7 +48,7 @@ class RiserItem extends Component {
           highestFloor={highestFloor}
           lowestFloor={lowestFloor}
         />
-        <RiserHelper 
+        <RiserInfo
           riser={riser}
           highestColdRange={highestColdRange}
           highestHotRange={highestHotRange}
@@ -58,6 +60,8 @@ class RiserItem extends Component {
           highestFloor={highestFloor}
           lowestFloor={lowestFloor}
           risers={risers}
+          editRiser={editRiser}
+          riserLabel={riserLabel}
         />
       </li>
     );

@@ -1,0 +1,16 @@
+.overview__toolbar__button {
+	/*width: 8vw;*/
+	height: 50px;
+	font-size: 2rem;
+	font-family: "Lato", sans-serif;
+	/*box-shadow: none;	*/
+	border-radius: 0;
+	background-color: transparent;
+	border: 0;
+	color: #555;
+}
+
+.overview__toolbar__button:hover {
+	cursor: pointer;
+	color: #4d83fe;
+}

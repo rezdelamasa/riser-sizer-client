@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+import Button from "./Button";
+
+import "./RiserHelper.css";
+
 class RiserHelper extends Component {
 
   render() {
@@ -14,7 +18,9 @@ class RiserHelper extends Component {
       totalFloorRange,
       highestFloor,
       lowestFloor,
-      risers
+      risers,
+      editRiser,
+      riserLabel
     } = this.props;
 
     let riserTopColdFloor, 
@@ -22,7 +28,9 @@ class RiserHelper extends Component {
         riserTopHotFloor, 
         riserBottomHotFloor,
         riserColdSize,
-        riserHotSize;
+        riserHotSize,
+        riserColdSourceFloor,
+        riserHotSourceFloor;
 
     if(riser.coldFloors) {
       if(riser.coldFloors.below.length > 0) {
@@ -36,6 +44,9 @@ class RiserHelper extends Component {
       } else if(riser.coldFloors.below.length > 0) {
         riserTopColdFloor = riser.coldFloors.below[riser.coldFloors.below.length - 1].label;
       }
+    } else {
+      riserBottomColdFloor = "N/A";
+      riserTopColdFloor = "N/A";
     }
 
     if(riser.hotFloors) {
@@ -50,6 +61,9 @@ class RiserHelper extends Component {
       } else if(riser.hotFloors.below.length > 0) {
         riserTopHotFloor = riser.hotFloors.below[riser.hotFloors.below.length - 1].label;
       }
+    } else {
+      riserBottomHotFloor = "N/A";
+      riserTopHotFloor = "N/A";
     }
 
     if(riser.totalSizes) {
@@ -57,12 +71,39 @@ class RiserHelper extends Component {
       riserHotSize = riser.totalSizes.hot;
     }
 
+    if(!riser.coldSourceFloor || riser.coldSourceFloor == undefined) {
+      riserColdSourceFloor = "N/A";
+    }
+
+    if(!riser.hotSourceFloor || riser.hotSourceFloor == undefined) {
+      riserHotSourceFloor = "N/A";
+    }
+
     return (
       <div className="riser-helper">
-        <p>Cold Floors: {riserBottomColdFloor + "-" + riserTopColdFloor}</p>
-        <p>Hot Floors: {riserBottomHotFloor + "-" + riserTopHotFloor}</p>
-        <p>Cold Source Floor: { riser.coldSourceFloor }</p>
-        <p>Hot Source Floor: { riser.hotSourceFloor }</p>
+        <div className="riser-text__wrapper">
+          <h1 className="riser__subheading riser__subheading--cold">Cold Floors</h1>
+          <p className="riser__text">{riserBottomColdFloor + " - " + riserTopColdFloor}</p>
+        </div>
+        <div className="riser-text__wrapper">
+          <h1 className="riser__subheading riser__subheading--cold">Cold Source Floor</h1>
+          <p className="riser__text">{ riserColdSourceFloor }</p>
+        </div>
+        <div className="riser-text__wrapper">
+          <h1 className="riser__subheading riser__subheading--hot">Hot Floors</h1>
+          <p className="riser__text">{riserBottomHotFloor + " - " + riserTopHotFloor}</p>
+        </div>
+        <div className="riser-text__wrapper">
+          <h1 className="riser__subheading riser__subheading--hot">Hot Source Floor</h1>
+          <p className="riser__text">{ riserHotSourceFloor }</p>
+        </div>
+        <Button
+          className={'button--edit'}
+          onClick={(e, id) => {editRiser(e, {riserLabel})}}
+        >
+          Edit
+          <p className="button__arrow">></p>
+        </Button>
       </div>
     );
   }

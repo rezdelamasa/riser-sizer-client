@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./FloorForm.css";
+
 class FloorForm extends Component {
 
   render() {

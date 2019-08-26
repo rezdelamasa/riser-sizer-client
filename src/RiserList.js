@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import RiserItem from "./RiserItem";
 
+import "./RiserList.css";
+
 class RiserList extends Component {
 
   render() {
@@ -23,10 +25,13 @@ class RiserList extends Component {
       editingAreaRef
     } = this.props;
     console.log(risers);
-  
-    return (
-      <ul className="riser-list" ref={editingAreaRef}>
-        {risers.map(riser => 
+
+    let list;
+
+    if(risers.length == 0) {
+      list = <p className="riser-list--empty">Empty</p>
+    } else {
+      list = risers.map(riser => 
           <RiserItem 
             handleRiserFormChange={handleRiserFormChange}
             handleRiserFormSubmit={handleRiserFormSubmit}
@@ -45,7 +50,12 @@ class RiserList extends Component {
             highestFloor={highestFloor}
             lowestFloor={lowestFloor}
           />
-        )}
+        )
+    }
+  
+    return (
+      <ul className="riser-list" ref={editingAreaRef}>
+        {list}
       </ul>
     );
   }

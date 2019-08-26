@@ -6,6 +6,8 @@ import { GiDesk } from "react-icons/gi";
 import { MdHotel } from "react-icons/md";
 import { MdRestaurant } from "react-icons/md";
 
+import "./FloorFixture.css";
+
 class FloorFixture extends Component {
 
   render() {
@@ -30,7 +32,7 @@ class FloorFixture extends Component {
     } else if(fixture.occupancy == "Offices, etc.") {
       fixtureInfoElement = (<p className="fixture__info"><GiDesk /></p>);
     } else if(fixture.occupancy == "Hotel, restaurant") {
-      fixtureInfoElement = (<p className="fixture__info"><MdHotel /> | <MdRestaurant /></p>);
+      fixtureInfoElement = (<p className="fixture__info"><MdRestaurant /></p>);
     } else {
       fixtureInfoElement = (<p className="fixture__info">{fixture.occupancy}</p>);
     }

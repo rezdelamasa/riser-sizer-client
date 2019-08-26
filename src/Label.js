@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import LabelBottom from "./LabelBottom";
+import LabelForm from "./LabelForm";
+import LabelBottomText from "./LabelBottomText";
+
+import "./Label.css";
 
 class Label extends Component {
 
@@ -10,17 +13,30 @@ class Label extends Component {
       showForm,
       riserLabel
     } = this.props;
+
+    let form;
+    let text;
+    if(riserLabel === '') {
+      form = (
+        <LabelForm 
+          handleRiserFormSubmit={handleRiserFormSubmit}
+          handleRiserFormChange={handleRiserFormChange}
+        />
+      );
+      text = null;
+    } else {
+      form = null;
+      text = (
+        <LabelBottomText 
+          riserLabel={riserLabel} 
+        />
+      );
+    }
+
     return (
       <div className="label">
-        <div className="label__half label__half--top">
-          <h1 className="label__text label__text--top">P</h1>
-        </div>
-        <LabelBottom 
-          handleRiserFormChange={handleRiserFormChange}
-          handleRiserFormSubmit={handleRiserFormSubmit}
-          showForm={showForm}
-          riserLabel={riserLabel}
-        />
+        {text}
+        {form}
       </div>
     );
   }

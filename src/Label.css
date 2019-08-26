@@ -1,0 +1,28 @@
+.label {
+  height: 50px;
+  width: 80%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+  background-color: white;
+  min-width: 50px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  color: #4d83fe;
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+}
+
+.label__text {
+  font-weight: 700;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 3rem;
+  border-bottom: 2px solid rgb(220,220,220);
+  width: 100%;
+  padding-bottom: 10px;
+}

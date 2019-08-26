@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import FloorForm from "./FloorForm";
+import "./FloorTotalInfo.css";
 
 class FloorTotalInfo extends Component {
 
@@ -73,9 +74,6 @@ class FloorTotalInfo extends Component {
             <p className="floor__total-info__values">
               H:
             </p>
-            <p className="floor__total-info__values">
-              T:
-            </p>
           </div>
           <div className="floor__total-info__column floor__total-info__column--sizes">
             <p className="floor__total-info__values">
@@ -83,9 +81,6 @@ class FloorTotalInfo extends Component {
             </p>
             <p className="floor__total-info__values">
               {sizes.hot}
-            </p>
-            <p className="floor__total-info__values">
-              {sizes.total}
             </p>
           </div>
           

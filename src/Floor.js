@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import FloorTotalInfo from "./FloorTotalInfo";
 import FloorMain from "./FloorMain";
 
+import "./Floor.css";
+
 class Floor extends Component {
 
   render() {

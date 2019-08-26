@@ -1,0 +1,19 @@
+.label__input::-webkit-inner-spin-button,
+.label__input::-webkit-outer-spin-button {
+	-webkit-appearance: none; 
+  margin: 0; 
+}
+
+.label__form {
+	width: 100%;
+}
+
+.label__input {
+	/*border-radius: 5px;*/
+	position: relative;
+	border: none;
+	border-bottom: 2px solid #4d83fe;
+	box-sizing: content-box;
+	height: 100%;
+	width: 100%;
+}

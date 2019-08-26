@@ -8,7 +8,7 @@ class LabelBottomText extends Component {
     } = this.props;
     return (
       <h1 className="label__text label__text--bottom">
-        {riserLabel}
+        Riser {riserLabel}
       </h1>
     );
   }

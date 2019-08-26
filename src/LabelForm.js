@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import "./LabelForm.css";
+
 class LabelForm extends Component {
 
   render() {
@@ -9,7 +11,12 @@ class LabelForm extends Component {
     } = this.props;
     return (
       <form className="label__form" onSubmit={handleRiserFormSubmit()}>
-        <input className="label__input" type="number" onChange={handleRiserFormChange()} />
+        <input 
+          className="label__input" 
+          type="number" 
+          onChange={handleRiserFormChange()}
+          placeholder="Label"
+        />
       </form>
     );
   }

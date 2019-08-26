@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import FloorFixtureList from "./FloorFixtureList";
 import FloorToolbar from "./FloorToolbar";
 
+import "./FloorMain.css";
+
 class FloorMain extends Component {
 
   render() {
