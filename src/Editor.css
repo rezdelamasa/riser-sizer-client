@@ -1,0 +1,13 @@
+.editor {
+	overflow-y: hidden;
+	flex-grow: 1;
+	height: unset;
+	min-height: unset;
+	box-sizing: border-box;
+	height: 100%;
+	position: absolute;
+	height: 100vh;
+	top: 0;
+	background-color: #ecf0f1;
+	z-index: 100;
+}

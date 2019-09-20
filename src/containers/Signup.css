@@ -1,0 +1,108 @@
+@media all and (min-width: 480px) {
+  .Signup {
+    /*padding: 60px 0;*/
+  }
+
+  .Signup form {
+    margin: 0 auto;
+    max-width: 480px;
+  }
+}
+
+.Signup form span.help-block {
+  font-size: 14px;
+  padding-bottom: 10px;
+  color: #999;
+}
+
+.Signup {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  background-color: #63a4ff;
+  position: relative;
+} 
+
+.Signup__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.Signup__header {
+  display: flex;
+  height: 70px;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.Signup__header a {
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+  letter-spacing: -0.25rem;
+}
+
+.Signup form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: unset;
+  z-index: 1;
+  position: relative;
+  margin-top: 10vh;
+  background-color: white;
+  padding: 50px;
+  box-sizing: content-box; 
+  border-radius: 10px;
+}
+
+.form-group {
+  height: 80px!important;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px!important;
+  width: 100%;
+}
+
+.form-control {
+  border: none;
+  box-shadow: none;
+  background-color: #eee;
+  border-bottom: 2px solid #c8d6e5;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.form-control:focus {
+  background-color: #DEE8FE;
+}
+
+.control-label {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.Signup .LoaderButton {
+  align-self: flex-end;
+}
+
+.form__heading {
+  text-align: left;
+  width: 100%;
+  margin-bottom: 50px;
+}

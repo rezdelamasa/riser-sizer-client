@@ -1,0 +1,81 @@
+.Projects {
+	height: 100vh; width: 100vw;
+	position: fixed;
+	top: 0;
+	box-sizing: border-box;
+	z-index: 3;
+	display: flex;
+}
+
+.Projects form textarea {
+  height: 300px;
+  font-size: 24px;
+}
+
+.Projects__wrapper {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	background-color: #ecf0f1;
+	flex-grow: 1;
+	overflow-x: hidden;
+}
+
+.Projects__Menu {
+	width: 10vw;
+	min-width: 250px;
+	background-color: white;
+	display: flex;	
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	z-index: 5;
+}
+
+.Menu__wrapper {
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	margin-top: 80px;
+}
+
+.Menu__account {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 50px;
+}
+
+.Menu__avi {
+	width: 40px;
+	height: 40px;
+	background-color: red;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.Menu__name {
+	margin: 0;
+	font-size: 1.6rem;
+	font-weight: bold;
+}
+
+.Menu__button {
+	margin: 25px 0;
+	font-size: 1.8rem;
+	color: #8D9698;
+	font-weight: bold;
+	background-color: transparent;
+	border: none;
+	text-align: left;
+	padding: 0;
+}
+
+.Menu__button:hover {
+	color: #4d83fe;
+	cursor: pointer;
+	text-decoration: none;
+}
+

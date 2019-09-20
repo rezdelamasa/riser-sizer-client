@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EditingArea from "./EditingArea";
 import Sidebar from "./Sidebar";
+import "./Editor.css";
 
 class Editor extends Component {
 
@@ -10,7 +11,7 @@ class Editor extends Component {
     this.state = {
       initialFloor: '',
       floors: [],
-      showForm: true
+      showForm: true,
     }
   }
 
@@ -23,14 +24,16 @@ class Editor extends Component {
       label,
       onBackClick,
       currentRiser,
-      handleFloorFormSubmit,
+      handleFloorLabelSubmit,
       handleFloorFormChange,
       addFloorAbove,
       addFloorBelow,
       currentFloor,
       editFloor,
       selectHotSource,
-      selectColdSource
+      selectColdSource,
+      handleFloorLabelChange,
+      handleFixtureDelete
     } = this.props;
     return (
       <div className="editor">
@@ -43,7 +46,7 @@ class Editor extends Component {
           label={label}
           onBackClick={onBackClick}
           currentRiser={currentRiser}
-          handleFloorFormSubmit={handleFloorFormSubmit}
+          handleFloorLabelSubmit={handleFloorLabelSubmit}
           handleFloorFormChange={handleFloorFormChange}
           addFloorAbove={addFloorAbove}
           addFloorBelow={addFloorBelow}
@@ -51,6 +54,8 @@ class Editor extends Component {
           editFloor={editFloor}
           selectHotSource={selectHotSource}
           selectColdSource={selectColdSource}
+          handleFloorLabelChange={handleFloorLabelChange}
+          handleFixtureDelete={handleFixtureDelete}
         />
         <Sidebar 
           onSelectFixture={onSelectFixture}

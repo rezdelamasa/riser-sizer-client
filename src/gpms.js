@@ -1,4 +1,5 @@
 const gpmsList = [
+	0,
 	1,
 	2,
 	3,
@@ -53,4 +54,4 @@ const gpmsList = [
 	5000
 ];
 
-export {gpmsList};
+export default gpmsList;

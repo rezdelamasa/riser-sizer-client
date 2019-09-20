@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RiserList from "./RiserList";
+import "./RisersContainer.css";
 
 class RisersContainer extends Component {
 
@@ -7,8 +8,7 @@ class RisersContainer extends Component {
     const {
       onClick,
       risers,
-      handleRiserFormChange,
-      handleRiserFormSubmit,
+      handleRiserLabelSubmit,
       showForm,
       editRiser,
       highestColdRange,
@@ -21,16 +21,21 @@ class RisersContainer extends Component {
       highestFloor,
       lowestFloor,
       handleScrollRight,
-      editingAreaRef
+      editingAreaRef,
+      handleEditRiser,
+      handleRiserLabelChange,
+      showLabelForm,
+      handleRiserDelete
     } = this.props;
 
     return (
       <div className="risers-container" ref={editingAreaRef}>
         <RiserList 
-          handleRiserFormChange={handleRiserFormChange}
-          handleRiserFormSubmit={handleRiserFormSubmit}
+          handleRiserLabelSubmit={handleRiserLabelSubmit}
+          handleRiserLabelChange={handleRiserLabelChange}
+          showLabelForm={showLabelForm}
           showForm={showForm}
-          editRiser={editRiser}
+          handleEditRiser={handleEditRiser}
           risers={risers}
           highestColdRange={highestColdRange}
           highestHotRange={highestHotRange}
@@ -41,6 +46,7 @@ class RisersContainer extends Component {
           totalFloorRange={totalFloorRange}
           highestFloor={highestFloor}
           lowestFloor={lowestFloor}
+          handleRiserDelete={handleRiserDelete}
         />
       </div>
     );

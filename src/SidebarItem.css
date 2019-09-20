@@ -1,0 +1,5 @@
+.Sidebar__item {
+	height: 150px;
+	max-height: unset;
+	min-height: 70px;
+}

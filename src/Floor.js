@@ -14,7 +14,7 @@ class Floor extends Component {
       onSubmit,
       showForm,
       currentRiser,
-      handleFloorFormSubmit,
+      handleFloorLabelSubmit,
       handleFloorFormChange,
       label,
       floorFixtures,
@@ -25,18 +25,27 @@ class Floor extends Component {
       selectColdSource,
       cumalativeLoadValues,
       gpms,
-      sizes
+      sizes,
+      handleFloorLabelChange,
+      loadValues,
+      handleFixtureDelete
     } = this.props;
 
-    let floorClass = '';
+    let floorClass = "";
 
-    if(currentFloor.label === label) {
-      floorClass += " floor--active";
-    } 
-
-    if(currentRiser.sourceFloor === label) {
-      floorClass += " floor--source";
+    if(currentRiser.currentFloor && label == currentRiser.currentFloor.label) {
+      floorClass = "floor floor--active";
+    } else {
+      floorClass = "floor";
     }
+
+    // if(currentFloor.label === label) {
+    //   floorClass += " floor--active";
+    // } 
+
+    // if(currentRiser.sourceFloor === label) {
+    //   floorClass += " floor--source";
+    // }
 
     if(currentRiser.coldSourceFloor && currentRiser.coldSourceFloor === label) {
       floorClass += " floor--cold-source";
@@ -55,7 +64,7 @@ class Floor extends Component {
     }
 
     return (
-      <li className={"floor " + floorClass}>
+      <li className={floorClass}>
         <FloorTotalInfo 
           floorFixtures={floorFixtures}
           label={label}
@@ -66,8 +75,10 @@ class Floor extends Component {
           onChange={onChange}
           onSubmit={onSubmit}
           initialFloor={initialFloor}
-          handleFloorFormSubmit={handleFloorFormSubmit}
+          handleFloorLabelSubmit={handleFloorLabelSubmit}
           handleFloorFormChange={handleFloorFormChange}
+          handleFloorLabelChange={handleFloorLabelChange}
+          handleFixtureDelete={handleFixtureDelete}
         />
         <FloorMain 
           editFloor={editFloor}
@@ -76,6 +87,9 @@ class Floor extends Component {
           currentRiser={currentRiser}
           selectHotSource={selectHotSource}
           selectColdSource={selectColdSource}
+          floorFixtures={floorFixtures}
+          loadValues={loadValues}
+          handleFixtureDelete={handleFixtureDelete}
         />
       </li>
     );

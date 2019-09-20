@@ -1,0 +1,5 @@
+.riser-wrapper {
+	height: 100%;
+	overflow-y: scroll;
+	padding: 30px;
+}

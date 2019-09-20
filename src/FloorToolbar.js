@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import FloorToolbarButtons from "./FloorToolbarButtons";
 import ToolbarInfo from "./ToolbarInfo";
+import "./FloorToolbar.css";
 
 class FloorToolbar extends Component {
 
@@ -9,7 +10,7 @@ class FloorToolbar extends Component {
     const {
       editFloor,
       label,
-      floorFixtures,
+      loadValues,
       selectHotSource,
       selectColdSource
     } = this.props;
@@ -22,7 +23,7 @@ class FloorToolbar extends Component {
           label={label}
         />
         <ToolbarInfo 
-          floorFixtures={floorFixtures}
+          loadValues={loadValues}
         />
       </div>
     );

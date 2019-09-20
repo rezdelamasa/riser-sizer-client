@@ -1,0 +1,55 @@
+.NewProject {
+	display: flex;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+	align-items: flex-start;
+	background-color: #ecf0f1;
+	padding: 0 25%;
+}
+
+.NewProject form {
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  height: unset;
+  margin-top: 20vh;
+  align-items: flex-start;
+}
+
+.NewProject h1 {
+	margin-bottom: 50px;
+	font-weight: bold;
+	color: #444;
+}
+
+.NewProject .form-control {
+	background-color: transparent;
+}
+
+.NewProject .form-control:focus {
+	background-color: white;
+}
+
+.NewProject form text {
+  height: 300px;
+  font-size: 24px;
+}
+
+.NewProject__buttons {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.NewProject__create {
+	width: 40%;
+}
+
+.NewProject__cancel {
+	font-size: 1.4rem;
+}

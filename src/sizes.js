@@ -9,6 +9,7 @@ const sizesList = [
 	'3/4"',
 	'3/4"',
 	'3/4"',
+	'3/4"',
 	'1"',
 	'1"',
 	'1"',
@@ -53,4 +54,4 @@ const sizesList = [
 	'6"',
 ];
 
-export {sizesList};
+export default sizesList;

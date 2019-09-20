@@ -7,15 +7,20 @@ class FloorFixtureList extends Component {
 
   render() {
     const {
-      floorFixtures
+      floorFixtures,
+      handleFixtureDelete
     } = this.props;
+
     return (
       <ul className="floor-fixtures">
-        {floorFixtures.map(fixture =>
-          <FloorFixture 
-            fixture={fixture}
-          />
-        )}
+        {
+          floorFixtures.map(fixture =>
+            <FloorFixture 
+              fixture={fixture}
+              handleFixtureDelete={handleFixtureDelete}
+            />
+          )
+        }
       </ul>
     );
   }

@@ -16,20 +16,22 @@ class FloorTotalInfo extends Component {
       onChange,
       onSubmit,
       initialFloor,
-      handleFloorFormSubmit,
-      handleFloorFormChange
+      handleFloorLabelSubmit,
+      handleFloorFormChange,
+      handleFloorLabelChange
     } = this.props;
 
     let form;
     let floorLabel;
-    if(currentRiser.floors.length === 0) {
+    if(currentRiser.floors.length <= 1 && label == "") {
       form = (
         <FloorForm 
           onChange={onChange}
           onSubmit={onSubmit}
           initialFloor={initialFloor}
-          handleFloorFormSubmit={handleFloorFormSubmit}
+          handleFloorLabelSubmit={handleFloorLabelSubmit}
           handleFloorFormChange={handleFloorFormChange}
+          handleFloorLabelChange={handleFloorLabelChange}
         />
       );  
       floorLabel = null;
@@ -83,7 +85,6 @@ class FloorTotalInfo extends Component {
               {sizes.hot}
             </p>
           </div>
-          
         </div>
         { form }
         <h1 className="floor__label">{label}</h1>

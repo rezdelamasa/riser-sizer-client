@@ -2,14 +2,23 @@ import React, { Component } from 'react';
 
 class FixtureButton extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
+  handleClick = (e) => {
+    this.props.onSelectFixture(e, this.props.fixture);
+  }
+
   render() {
     const { 
       fixture, 
       onSelectFixture 
     } = this.props;
+
     return (
       <button 
-        onClick={() => onSelectFixture(fixture)} 
+        onClick={this.handleClick} 
         type="button"
         className="fixture-button"
       >

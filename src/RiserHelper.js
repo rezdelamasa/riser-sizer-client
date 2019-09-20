@@ -6,6 +6,10 @@ import "./RiserHelper.css";
 
 class RiserHelper extends Component {
 
+  handleDelete = (e) => {
+    this.props.handleRiserDelete(e, this.props.riserLabel);
+  }
+
   render() {
     const {
       riser,
@@ -19,8 +23,9 @@ class RiserHelper extends Component {
       highestFloor,
       lowestFloor,
       risers,
-      editRiser,
-      riserLabel
+      handleEditRiser,
+      riserLabel,
+      handleRiserDelete
     } = this.props;
 
     let riserTopColdFloor, 
@@ -77,33 +82,46 @@ class RiserHelper extends Component {
 
     if(!riser.hotSourceFloor || riser.hotSourceFloor == undefined) {
       riserHotSourceFloor = "N/A";
+    } else {
+      riserHotSourceFloor = riser.hotSourceFloor;
     }
 
     return (
       <div className="riser-helper">
-        <div className="riser-text__wrapper">
-          <h1 className="riser__subheading riser__subheading--cold">Cold Floors</h1>
-          <p className="riser__text">{riserBottomColdFloor + " - " + riserTopColdFloor}</p>
+        <div className="riser__content">
+          <div className="riser-text__wrapper">
+            <h1 className="riser__subheading riser__subheading--cold">Cold Floors</h1>
+            <p className="riser__text">{riserBottomColdFloor + " - " + riserTopColdFloor}</p>
+          </div>
+          <div className="riser-text__wrapper">
+            <h1 className="riser__subheading riser__subheading--cold">Cold Source Floor</h1>
+            <p className="riser__text">{ riserColdSourceFloor }</p>
+          </div>
+          <div className="riser-text__wrapper">
+            <h1 className="riser__subheading riser__subheading--hot">Hot Floors</h1>
+            <p className="riser__text">{riserBottomHotFloor + " - " + riserTopHotFloor}</p>
+          </div>
+          <div className="riser-text__wrapper">
+            <h1 className="riser__subheading riser__subheading--hot">Hot Source Floor</h1>
+            <p className="riser__text">{ riserHotSourceFloor }</p>
+          </div>
         </div>
-        <div className="riser-text__wrapper">
-          <h1 className="riser__subheading riser__subheading--cold">Cold Source Floor</h1>
-          <p className="riser__text">{ riserColdSourceFloor }</p>
+        <div className="riser__button-wrapper">
+          <Button
+            className={'button--edit'}
+            onClick={(e, id) => {handleEditRiser(e, {riserLabel})}}
+          >
+            Edit
+            <p className="button__arrow">></p>
+          </Button>
+          <Button
+            className={'button--delete'}
+            onClick={this.handleDelete}
+          >
+            Delete
+          </Button>
         </div>
-        <div className="riser-text__wrapper">
-          <h1 className="riser__subheading riser__subheading--hot">Hot Floors</h1>
-          <p className="riser__text">{riserBottomHotFloor + " - " + riserTopHotFloor}</p>
-        </div>
-        <div className="riser-text__wrapper">
-          <h1 className="riser__subheading riser__subheading--hot">Hot Source Floor</h1>
-          <p className="riser__text">{ riserHotSourceFloor }</p>
-        </div>
-        <Button
-          className={'button--edit'}
-          onClick={(e, id) => {editRiser(e, {riserLabel})}}
-        >
-          Edit
-          <p className="button__arrow">></p>
-        </Button>
+        
       </div>
     );
   }

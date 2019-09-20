@@ -1,42 +1,46 @@
 import React, { Component } from "react";
-import LabelForm from "./LabelForm";
 import LabelBottomText from "./LabelBottomText";
 
 import "./Label.css";
 
 class Label extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit = (e) => {
+    this.props.handleRiserLabelSubmit(e, this.props.riserIndex);
+  }
+  
   render() {
     const {
-      handleRiserFormChange,
-      handleRiserFormSubmit,
+      handleRiserLabelSubmit,
       showForm,
-      riserLabel
+      riserLabel,
+      handleRiserLabelChange,
+      riserIndex,
+      showLabelForm,
+      riser
     } = this.props;
-
-    let form;
-    let text;
-    if(riserLabel === '') {
-      form = (
-        <LabelForm 
-          handleRiserFormSubmit={handleRiserFormSubmit}
-          handleRiserFormChange={handleRiserFormChange}
-        />
-      );
-      text = null;
-    } else {
-      form = null;
-      text = (
-        <LabelBottomText 
-          riserLabel={riserLabel} 
-        />
-      );
-    }
 
     return (
       <div className="label">
-        {text}
-        {form}
+        {riser.isEditingLabel
+          ? <form className="label__form" onSubmit={this.handleSubmit}>
+              <input 
+                className="label__input" 
+                type="number" 
+                onChange={handleRiserLabelChange}
+                placeholder="Label"
+              />
+            </form>
+          : <LabelBottomText 
+              riserLabel={riser.label}
+            />
+        }
       </div>
     );
   }

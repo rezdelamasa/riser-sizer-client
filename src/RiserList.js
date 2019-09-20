@@ -5,13 +5,36 @@ import "./RiserList.css";
 
 class RiserList extends Component {
 
+  constructor(props) {
+    super(props);
+    this.riserListRef = React.createRef();
+
+    this.handleWheel = this.handleWheel.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleWheel);
+  }
+
+  handleWheel(e) {
+    console.log(e.target);
+    const item = this.riserListRef.current;
+    console.log(this.riserListRef);
+    if(item) {
+      if(e.deltaY > 0) {
+        item.scrollLeft += 20;
+      } else {
+        item.scrollLeft -= 20;
+      }
+    }
+  }
+
   render() {
     const {
       risers,
-      handleRiserFormChange,
-      handleRiserFormSubmit,
+      handleRiserLabelSubmit,
       showForm,
-      editRiser,
+      handleEditRiser,
       highestColdRange,
       highestHotRange,
       topColdFloor,
@@ -22,7 +45,10 @@ class RiserList extends Component {
       highestFloor,
       lowestFloor,
       leftScroll,
-      editingAreaRef
+      editingAreaRef,
+      handleRiserLabelChange,
+      showLabelForm,
+      handleRiserDelete
     } = this.props;
     console.log(risers);
 
@@ -31,13 +57,15 @@ class RiserList extends Component {
     if(risers.length == 0) {
       list = <p className="riser-list--empty">Empty</p>
     } else {
-      list = risers.map(riser => 
-          <RiserItem 
-            handleRiserFormChange={handleRiserFormChange}
-            handleRiserFormSubmit={handleRiserFormSubmit}
+      list = risers.map((riser, index) => 
+          <RiserItem
+            riserIndex={index}
+            handleRiserLabelSubmit={handleRiserLabelSubmit}
+            handleRiserLabelChange={handleRiserLabelChange}
+            showLabelForm={showLabelForm}
             showForm={showForm}
             riserLabel={riser.label}
-            editRiser={editRiser}
+            handleEditRiser={handleEditRiser}
             riser={riser}
             risers={risers}
             highestColdRange={highestColdRange}
@@ -49,12 +77,13 @@ class RiserList extends Component {
             totalFloorRange={totalFloorRange}
             highestFloor={highestFloor}
             lowestFloor={lowestFloor}
+            handleRiserDelete={handleRiserDelete}
           />
         )
     }
   
     return (
-      <ul className="riser-list" ref={editingAreaRef}>
+      <ul className="riser-list" ref={this.riserListRef} onWheel={this.handleWheel}>
         {list}
       </ul>
     );

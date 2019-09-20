@@ -9,21 +9,30 @@ import "./ToolbarButtonWrapper.css";
 
 class ToolbarButtonWrapper extends Component {
 
+  handleAddFloorAbove = (e) => {
+    this.props.addFloorAbove(e);
+  }
+
+  handleAddFloorBelow = (e) => {
+    this.props.addFloorBelow(e);
+  }
+
   render() {
     const {
       addFloorAbove,
       addFloorBelow,
     } = this.props;
+
     return (
       <div className="toolbar__button-wrapper">
         <Button
-          onClick={addFloorAbove}
+          onClick={this.handleAddFloorAbove}
           className="toolbar__button toolbar__button--add"
         >
           <IoIosAdd /><IoIosArrowRoundUp />
         </Button>
         <Button
-          onClick={addFloorBelow}
+          onClick={this.handleAddFloorBelow}
           className="toolbar__button toolbar__button--add"
         >
           <IoIosAdd /><IoIosArrowRoundDown />

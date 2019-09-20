@@ -14,14 +14,57 @@
 }
 
 .App {
-  /*text-align: center;*/
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  /*height: 100vh;*/
-  /*overflow: hidden;*/
-  min-height: 0; 
   height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /*overflow-y: hidden;*/
+}
+
+.navbar {
+  height: 80px;
+  min-height: 80px;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  background-color: white;
+}
+
+.navbar::before {
+  content: unset;
+}
+
+.navbar__wrapper {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.navbar__brand {
+  font-size: 3rem;
+  margin: 0;
+  color: white;
+  font-weight: bold;
+  letter-spacing: -0.25rem;
+}
+
+.navbar__list > li {
+  font-size: 2rem;
+  margin: 0 20px;
+}
+
+.navbar__list > li > a {
+  color: white;
 }
 
 .Overview {
@@ -433,7 +476,7 @@
   position: absolute;
   content: "";
   height: 10px;
-  top: -10px;
+  top: 10px;
   width: 100%;
   left: -5px;
 }
@@ -443,7 +486,7 @@
   position: absolute;
   content: "";
   height: 10px;
-  top: 0px;
+  top: 20px;
   width: 100%;
   left: 5px;
 }

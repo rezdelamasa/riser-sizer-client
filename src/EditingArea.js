@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import Toolbar from "./Toolbar";
 import RiserWrapper from "./RiserWrapper";
+import "./EditingArea.css";
 
 class EditingArea extends Component {
 
@@ -15,14 +16,16 @@ class EditingArea extends Component {
       label, 
       onBackClick,
       currentRiser,
-      handleFloorFormSubmit,
+      handleFloorLabelSubmit,
       handleFloorFormChange,
       addFloorAbove,
       addFloorBelow,
       currentFloor,
       editFloor,
       selectHotSource,
-      selectColdSource
+      selectColdSource,
+      handleFloorLabelChange,
+      handleFixtureDelete
     } = this.props;
     return (
       <div className="editing-area">
@@ -39,11 +42,13 @@ class EditingArea extends Component {
           showForm={showForm}
           currentRiser={currentRiser}
           currentFloor={currentFloor}
-          handleFloorFormSubmit={handleFloorFormSubmit}
+          handleFloorLabelSubmit={handleFloorLabelSubmit}
           handleFloorFormChange={handleFloorFormChange}
           editFloor={editFloor}
           selectHotSource={selectHotSource}
           selectColdSource={selectColdSource}
+          handleFloorLabelChange={handleFloorLabelChange}
+          handleFixtureDelete={handleFixtureDelete}
         />
       </div>
     );

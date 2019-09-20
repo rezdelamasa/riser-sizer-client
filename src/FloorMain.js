@@ -17,13 +17,16 @@ class FloorMain extends Component {
       currentFloor,
       editFloor,
       selectHotSource,
-      selectColdSource
+      selectColdSource,
+      loadValues,
+      handleFixtureDelete
     } = this.props;
 
     return (
       <div className="floor__main">
         <FloorFixtureList
           floorFixtures={floorFixtures}
+          handleFixtureDelete={handleFixtureDelete}
         />
         <FloorToolbar 
           editFloor={editFloor}
@@ -31,6 +34,7 @@ class FloorMain extends Component {
           floorFixtures={floorFixtures}
           selectHotSource={selectHotSource}
           selectColdSource={selectColdSource}
+          loadValues={loadValues}
         />
       </div>
     );

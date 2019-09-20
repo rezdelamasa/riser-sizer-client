@@ -6,17 +6,12 @@ import "./RiserItem.css";
 
 class RiserItem extends Component {
 
-  handleClick = (e) => {
-    this.props.editRiser(e, this.props.riserLabel);
-  }
-
   render() {
     const {
-      handleRiserFormChange,
-      handleRiserFormSubmit,
+      handleRiserLabelSubmit,
       showForm,
       riserLabel,
-      editRiser,
+      handleEditRiser,
       riser,
       highestColdRange,
       highestHotRange,
@@ -27,16 +22,21 @@ class RiserItem extends Component {
       totalFloorRange,
       highestFloor,
       lowestFloor,
-      risers
+      risers,
+      handleRiserLabelChange,
+      riserIndex,
+      showLabelForm,
+      handleRiserDelete
     } = this.props;
     return (
       <li className="riser-item">
         <RiserToolbar 
-          handleRiserFormChange={handleRiserFormChange}
-          handleRiserFormSubmit={handleRiserFormSubmit}
+          handleRiserLabelSubmit={handleRiserLabelSubmit}
+          handleRiserLabelChange={handleRiserLabelChange}
+          showLabelForm={showLabelForm}
           showForm={showForm}
           riserLabel={riser.label}
-          editRiser={editRiser}
+          handleEditRiser={handleEditRiser}
           riser={riser}
           highestColdRange={highestColdRange}
           highestHotRange={highestHotRange}
@@ -47,6 +47,7 @@ class RiserItem extends Component {
           totalFloorRange={totalFloorRange}
           highestFloor={highestFloor}
           lowestFloor={lowestFloor}
+          riserIndex={riserIndex}
         />
         <RiserInfo
           riser={riser}
@@ -60,8 +61,9 @@ class RiserItem extends Component {
           highestFloor={highestFloor}
           lowestFloor={lowestFloor}
           risers={risers}
-          editRiser={editRiser}
+          handleEditRiser={handleEditRiser}
           riserLabel={riserLabel}
+          handleRiserDelete={handleRiserDelete}
         />
       </li>
     );

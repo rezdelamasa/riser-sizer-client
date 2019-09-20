@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import FixtureButton from "./FixtureButton";
+import "./SidebarItem.css";
 
 class SidebarItem extends Component {
 

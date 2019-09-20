@@ -20,8 +20,9 @@ class RiserInfo extends Component {
       highestFloor,
       lowestFloor,
       risers,
-      editRiser,
-      riserLabel
+      handleEditRiser,
+      riserLabel,
+      handleRiserDelete
     } = this.props;
     return (
       <div className="riser-item__info">
@@ -37,8 +38,9 @@ class RiserInfo extends Component {
           highestFloor={highestFloor}
           lowestFloor={lowestFloor}
           risers={risers}
-          editRiser={editRiser}
+          handleEditRiser={handleEditRiser}
           riserLabel={riserLabel}
+          handleRiserDelete={handleRiserDelete}
         />
       </div>
     );

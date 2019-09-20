@@ -2,26 +2,63 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: space-evenly;
 	background-color: #4d83fe;
-	padding: 0 20px;
+	padding: 10px 20px 0 20px;
 	border-radius: 2px;
 	height: 100%;
 	color: white;
 	box-shadow: 0px 2px 5px 1px rgba(100,100,100,1);
 	margin-bottom: 20px;
 	max-height: unset;
+	min-height: 150px;
+	max-width: 120px;
+	width: unset;
+	position: relative;
+}
+
+.fixture--delete {
+	background-color: #e74c3c;
+}
+
+.fixture--delete .fixture__info {
+	background-color: #c0392b;
+}
+
+.fixture__label {
+	text-align: center;
 }
 
 .fixture__info {
 	background-color: #406CD0;
-	padding: 15px;
+	padding: 12px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 100%;
-	font-size: 2.8rem;
+	font-size: 0.8vw;
 }
 
 .fixture__type {
 	font-size: 1.5rem;
+	text-align: center;
+}
+
+.floor--active .fixture__delete {
+	display: flex;
+	position: absolute;
+	top: 0;
+	right: 5px;
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 2rem;
+}
+
+.fixture__delete {
+	display: none;
+}
+
+.fixture__delete:focus {
+	outline: none;
 }

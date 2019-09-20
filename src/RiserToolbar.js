@@ -8,21 +8,26 @@ import "./RiserToolbar.css";
 class RiserToolbar extends Component {
   render() {
     const {
-      handleRiserFormChange,
-      handleRiserFormSubmit,
+      handleRiserLabelSubmit,
       showForm,
       riserLabel,
       editRiser,
-      riser
+      riser,
+      handleRiserLabelChange,
+      riserIndex,
+      showLabelForm,
     } = this.props;
 
     return (
       <div className="riser__toolbar">
         <Label 
-          handleRiserFormChange={handleRiserFormChange}
-          handleRiserFormSubmit={handleRiserFormSubmit}
+          handleRiserLabelSubmit={handleRiserLabelSubmit}
+          handleRiserLabelChange={handleRiserLabelChange}
+          showLabelForm={showLabelForm}
           showForm={showForm}
           riserLabel={riserLabel}
+          riserIndex={riserIndex}
+          riser={riser}
         />
       </div>
     );

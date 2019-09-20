@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import Riser from "./Riser";
+import Riser from "./Riser"; 
+import "./RiserWrapper.css";
 
 class RiserWrapper extends Component {
 
@@ -11,12 +12,14 @@ class RiserWrapper extends Component {
       onSubmit,
       showForm,
       currentRiser,
-      handleFloorFormSubmit,
+      handleFloorLabelSubmit,
       handleFloorFormChange,
       currentFloor,
       editFloor,
       selectHotSource,
-      selectColdSource
+      selectColdSource,
+      handleFloorLabelChange,
+      handleFixtureDelete
     } = this.props;
 
     return (
@@ -28,11 +31,13 @@ class RiserWrapper extends Component {
           showForm={showForm}
           currentRiser={currentRiser}
           currentFloor={currentFloor}
-          handleFloorFormSubmit={handleFloorFormSubmit}
+          handleFloorLabelSubmit={handleFloorLabelSubmit}
           handleFloorFormChange={handleFloorFormChange}
           editFloor={editFloor}
           selectHotSource={selectHotSource}
           selectColdSource={selectColdSource}
+          handleFloorLabelChange={handleFloorLabelChange}
+          handleFixtureDelete={handleFixtureDelete}
         />
       </div>
     );

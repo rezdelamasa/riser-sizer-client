@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import OverviewToolbar from "./OverviewToolbar";
 import Button from "./Button";
 import RisersContainer from "./RisersContainer";
+import "./Overview.css";
 
 import { FaChevronRight } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa";
@@ -52,7 +52,6 @@ class Overview extends Component {
     const {
       onClick,
       risers,
-      handleRiserFormChange,
       handleRiserFormSubmit,
       showForm,
       editRiser,
@@ -64,33 +63,25 @@ class Overview extends Component {
       bottomColdFloor,
       totalFloorRange,
       highestFloor,
-      lowestFloor
+      lowestFloor,
+      projectName,
+      handleEditRiser,
+      handleRiserLabelSubmit,
+      handleRiserLabelChange,
+      showLabelForm,
+      handleRiserDelete
     } = this.props;
 
     return (
       <div className="Overview">
-        <OverviewToolbar 
-          onClick={onClick}
-        />
-        <Button 
-          onClick={this.handleScrollRight}
-          className="scroll-button scroll-button--right"
-        >
-          <FaChevronRight></FaChevronRight>
-        </Button>
-        <Button 
-          onClick={this.handleScrollLeft}
-          className="scroll-button scroll-button--left"
-        >
-          <FaChevronLeft></FaChevronLeft>
-        </Button>
         <RisersContainer 
           risers={risers}
-          handleRiserFormChange={handleRiserFormChange}
-          handleRiserFormSubmit={handleRiserFormSubmit}
+          handleRiserLabelSubmit={handleRiserLabelSubmit}
+          handleRiserLabelChange={handleRiserLabelChange}
+          showLabelForm={showLabelForm}
           showForm={showForm}
           className={'button--edit'}
-          editRiser={editRiser}
+          handleEditRiser={handleEditRiser}
           highestColdRange={highestColdRange}
           highestHotRange={highestHotRange}
           topColdFloor={topColdFloor}
@@ -101,6 +92,7 @@ class Overview extends Component {
           highestFloor={highestFloor}
           lowestFloor={lowestFloor}
           editingAreaRef={el => this.editingAreaElement = el}
+          handleRiserDelete={handleRiserDelete}
         />
       </div>
     );

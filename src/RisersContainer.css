@@ -1,0 +1,10 @@
+.risers-container {
+	overflow-y: hidden;
+	width: 90%;
+	padding: 2vh 0 2vh 0;
+	align-items: center;
+	margin: 0 auto;
+	margin-top: 50px;
+	overflow-x: hidden;
+	justify-content: flex-start;
+}

@@ -2,3 +2,7 @@
 	height: 100%;
 	min-height: 100%;
 }
+
+.floor__main::after {
+	pointer-events: none;
+}

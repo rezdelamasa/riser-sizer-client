@@ -1,6 +1,7 @@
 .riser-item {
-  width: 10vw;
-  min-width: 150px;
+  width: 200px;
+  min-width: 200px;
+  height: 99%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +10,7 @@
   /*top: 160px;*/
   background-color: white;
   margin-right: 40px;
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-     -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+     -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }

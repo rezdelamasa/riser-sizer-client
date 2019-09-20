@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from "react";
 import './App.css';
 import { fixtures } from './fixtures.js';
 import { demandsList } from './demands.js';
-import { gpmsList } from './gpms.js';
-import { sizesList } from './sizes.js';
+import gpmsList from './gpms.js';
+import sizesList from './sizes.js';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +11,11 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faWater } from '@fortawesome/free-solid-svg-icons';
 import { FiPause } from "react-icons/fi";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import Routes from "./Routes";
+import { Auth } from "aws-amplify";
 
 import Overview from "./Overview";
 import Editor from "./Editor";
@@ -23,7 +27,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      risers: [],
+      isAuthenticated: false,
+      isAuthenticating: true,
+      // risers: [],
       initialFloor: '',
       currentRiser: {
         label: '',
@@ -58,7 +64,8 @@ class App extends Component {
       visible: 'Overview',
       showForm: true,
       riserLabelInput: '',
-      floorInitInput: ''
+      floorInitInput: '',
+      user: '',
     };
 
     this.update                 = this.update.bind(this);
@@ -84,7 +91,50 @@ class App extends Component {
     this.getBottomColdFloor     = this.getBottomColdFloor.bind(this);
     this.getBottomHotFloor      = this.getBottomHotFloor.bind(this);
     this.getTotalFloorRange     = this.getTotalFloorRange.bind(this);
+    this.handleLogout           = this.handleLogout.bind(this);
   }
+
+  async componentDidMount() {
+    let userObject = {};
+    let email;
+    try {
+      await Auth.currentSession();
+      userObject = await Auth.currentUserInfo();
+      email = userObject.attributes.email.substring(0, userObject.attributes.email.indexOf('@'));
+      this.userHasAuthenticated(true);
+    }
+    catch(e) {
+      if (e !== 'No current user') {
+        alert(e);
+      }
+      console.log(e);
+    }
+
+    console.log(email);
+
+    this.setState(
+      { 
+        isAuthenticating: false,
+        user: email
+      }
+    );
+  }
+
+  userHasAuthenticated = (authenticated) => {
+    this.setState({ 
+      isAuthenticated: authenticated,
+    });
+  };
+
+  handleLogout = async event => {
+    await Auth.signOut();
+
+    this.userHasAuthenticated(false);
+
+    this.props.history.push("/");
+  }
+
+
 
   handleFloorFormChange(e) {
     console.log(e.target.value);
@@ -936,6 +986,14 @@ class App extends Component {
   }
 
   render() {
+
+    const childProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      userHasAuthenticated: this.userHasAuthenticated,
+      user: this.state.user,
+      handleLogout: this.handleLogout,
+    }; 
+
     let page;
     if(this.state.visible === "Overview") {
       page = 
@@ -976,11 +1034,12 @@ class App extends Component {
       );
     }
     return (
+      !this.state.isAuthenticating &&
       <div className="App">
-          {page}
+        <Routes childProps={childProps} />
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

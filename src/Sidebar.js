@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import SidebarItem from "./SidebarItem";
 import {fixtures} from "./fixtures.js";
+import "./Sidebar.css";
 
 class Sidebar extends Component {
 

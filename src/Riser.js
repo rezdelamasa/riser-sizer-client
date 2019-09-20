@@ -11,12 +11,14 @@ class Riser extends Component {
       onSubmit,
       showForm,
       currentRiser,
-      handleFloorFormSubmit,
+      handleFloorLabelSubmit,
       handleFloorFormChange,
       currentFloor,
       editFloor,
       selectHotSource,
-      selectColdSource
+      selectColdSource,
+      handleFloorLabelChange,
+      handleFixtureDelete
     } = this.props;
 
     let riser;
@@ -27,6 +29,8 @@ class Riser extends Component {
       total: 0
     }
 
+    let emptyArray = [];
+
     if(currentRiser.floors.length === 0) {
       riser = (
         <Floor 
@@ -35,15 +39,17 @@ class Riser extends Component {
           initialFloor={initialFloor}
           showForm={showForm}
           currentRiser={currentRiser}
-          handleFloorFormSubmit={handleFloorFormSubmit}
+          handleFloorLabelSubmit={handleFloorLabelSubmit}
           handleFloorFormChange={handleFloorFormChange}
-          floorFixtures={currentRiser.floors}
           currentFloor={currentFloor}
           selectHotSource={selectHotSource}
           selectColdSource={selectColdSource}
           cumalativeLoadValues={emptyLoadValues}
           gpms={emptyLoadValues}
           sizes={emptyLoadValues}
+          handleFloorLabelChange={handleFloorLabelChange}
+          floorFixtures={emptyArray}
+          handleFixtureDelete={handleFixtureDelete}
         />
       );
     } else {
@@ -51,6 +57,7 @@ class Riser extends Component {
         currentRiser.floors.map(floor => 
           <Floor 
             currentRiser={currentRiser}
+            loadValues={floor.loadValues}
             label={floor.label}
             floorFixtures={floor.fixtures}
             cumalativeLoadValues={floor.cumalativeLoadValues}
@@ -61,6 +68,9 @@ class Riser extends Component {
             editFloor={editFloor}
             selectHotSource={selectHotSource}
             selectColdSource={selectColdSource}
+            handleFloorLabelChange={handleFloorLabelChange}
+            handleFloorLabelSubmit={handleFloorLabelSubmit}
+            handleFixtureDelete={handleFixtureDelete}
           />
         )
       );

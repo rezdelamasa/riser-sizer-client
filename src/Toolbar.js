@@ -7,7 +7,11 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 
 import "./Toolbar.css";
 
-class Toolbar extends Component {
+class Toolbar extends Component { 
+
+  handleClick = (e) => {
+    this.props.onBackClick(e);
+  }
 
   render() {
     const {
@@ -15,11 +19,13 @@ class Toolbar extends Component {
       label,
       addFloorAbove,
       addFloorBelow,
-    } = this.props;
+    } = this.props; 
+
+
     return (
       <div className="toolbar">
         <Button
-          onClick={onBackClick}
+          onClick={this.handleClick}
           className="toolbar__button toolbar__button--back"
         >
           <IoIosArrowRoundBack />

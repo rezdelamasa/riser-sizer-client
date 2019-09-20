@@ -14,11 +14,7 @@ class ToolbarButtons extends Component {
     } = this.props;
     return (
       <div className="overview__toolbar__buttons">
-        <Button onClick={onClick}
-          className="overview__toolbar__button overview__toolbar__button--create"
-        >
-          Create Riser +
-        </Button>
+        
       </div>
     );
   }

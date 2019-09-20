@@ -4,20 +4,24 @@ import "./LabelForm.css";
 
 class LabelForm extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      input: ""
+    }
+  }
+
   render() {
     const {
-      handleRiserFormSubmit,
-      handleRiserFormChange
+      handleRiserLabelSubmit,
+      handleChange,
+      formInput,
+      handleRiserLabelChange,
+      riserIndex
     } = this.props;
     return (
-      <form className="label__form" onSubmit={handleRiserFormSubmit()}>
-        <input 
-          className="label__input" 
-          type="number" 
-          onChange={handleRiserFormChange()}
-          placeholder="Label"
-        />
-      </form>
+      
     );
   }
 }
