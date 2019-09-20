@@ -135,7 +135,7 @@ export default class Home extends Component {
             <a className="Menu__button">
               Help
             </a>
-            <a className="Menu__button">
+            <a className="Menu__button" href="/settings">
               Settings
             </a>
             <a className="Menu__button" onClick={this.props.handleLogout}>
