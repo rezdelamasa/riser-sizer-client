@@ -11,7 +11,7 @@ class BillingForm extends Component {
     this.state = {
       name: "",
       isProcessing: false,
-      isCardComplete: false
+      isCardComplete: false,
     };
   }
 
@@ -45,7 +45,7 @@ class BillingForm extends Component {
 
     this.setState({ isProcessing: false });
 
-    this.props.onSubmit({ token, error });
+    this.props.onSubmit(this.props.clickedTier, { token, error });
   }
 
   render() {
@@ -53,6 +53,7 @@ class BillingForm extends Component {
 
     return (
       <form className="BillingForm" onSubmit={this.handleSubmitClick}>
+        <h1>{this.props.clickedTier} Plan</h1>
         <hr />
         <FormGroup bsSize="large" controlId="name">
           <ControlLabel>Cardholder&apos;s name</ControlLabel>
@@ -60,7 +61,7 @@ class BillingForm extends Component {
             type="text"
             value={this.state.name}
             onChange={this.handleFieldChange}
-            placeholder="Name on the card"
+            placeholder="Cardholder Name"
           />
         </FormGroup>
         <ControlLabel>Credit Card Info</ControlLabel>

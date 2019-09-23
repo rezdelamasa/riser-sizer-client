@@ -54,9 +54,6 @@ export default class Signup extends Component {
         username: this.state.email,
         password: this.state.password
       });
-      this.setState({
-        newUser
-      });
     } catch (e) {
       console.log(e);
       if(e.name === "UsernameExistsException") {

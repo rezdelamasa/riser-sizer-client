@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import './App.css';
+import { API, Storage } from "aws-amplify";
 import { fixtures } from './fixtures.js';
 import { demandsList } from './demands.js';
 import gpmsList from './gpms.js';
@@ -29,43 +30,10 @@ class App extends Component {
     this.state = {
       isAuthenticated: false,
       isAuthenticating: true,
-      // risers: [],
-      initialFloor: '',
-      currentRiser: {
-        label: '',
-        floors: [],
-        sourceFloor: '',
-        coldSourceFloor: '',
+      user: {
+        email: '',
+        membership: ''
       },
-      currentFloor: {
-        label: '',
-        fixtures: [],
-        cumalativeLoadValues: {
-          cold: 0,
-          hot: 0, 
-          total: 0
-        },
-        loadValues: {
-          cold: 0,
-          hot: 0,
-          total: 0
-        },
-        gpms: {
-          cold: 0,
-          hot: 0,
-          total: 0
-        },
-        sizes: {
-          cold: '0',
-          hot: '0',
-          total: '0'
-        },
-      },
-      visible: 'Overview',
-      showForm: true,
-      riserLabelInput: '',
-      floorInitInput: '',
-      user: '',
     };
 
     this.update                 = this.update.bind(this);
@@ -119,6 +87,22 @@ class App extends Component {
       }
     );
   }
+
+  // getUser() {
+  //   return API.get("riser-sizer-user-properties", `/riser-sizer-user-properties/${this.props.match.params.id}`);
+  // }
+
+  // createUser(user) {
+  //   return API.post("riser-sizer-user-properties", "/riser-sizer-user-properties", {
+  //     body: user
+  //   });
+  // }
+
+  // saveUser(user) {
+  //   return API.put("riser-sizer-user-properties", `/riser-sizer-user-properties/${this.props.match.params.id}`, {
+  //     body: user
+  //   });
+  // }
 
   userHasAuthenticated = (authenticated) => {
     this.setState({ 
