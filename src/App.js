@@ -83,7 +83,7 @@ class App extends Component {
     this.setState(
       { 
         isAuthenticating: false,
-        user: email
+        user: userObject.attributes
       }
     );
   }
