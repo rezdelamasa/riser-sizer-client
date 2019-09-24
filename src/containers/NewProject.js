@@ -94,7 +94,6 @@ export default class NewProject extends Component {
             <a href="/" className="NewProject__cancel">Cancel</a>
             <LoaderButton
               className="NewProject__create"
-              block
               bsStyle="primary"
               bsSize="large"
               disabled={!this.validateForm()}

@@ -6,6 +6,9 @@
 	align-items: flex-start;
 	background-color: #ecf0f1;
 	padding: 0 25%;
+	background-image: url(https://res.cloudinary.com/rezdelamasa/image/upload/v1568779719/riser-sizer-bg.svg);
+	background-size: cover;
+	background-position: 60% 100%;
 }
 
 .NewProject form {
@@ -17,6 +20,10 @@
   height: unset;
   margin-top: 20vh;
   align-items: flex-start;
+  background-color: white;
+  padding: 100px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,.5);
 }
 
 .NewProject h1 {
@@ -26,11 +33,16 @@
 }
 
 .NewProject .form-control {
-	background-color: transparent;
+  border: none;
+  box-shadow: none;
+  background-color: #eee;
+  border-bottom: 2px solid #c8d6e5;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .NewProject .form-control:focus {
-	background-color: white;
+  background-color: #DEE8FE;
 }
 
 .NewProject form text {
@@ -44,10 +56,7 @@
 	width: 100%;
 	justify-content: space-between;
 	align-items: center;
-}
-
-.NewProject__create {
-	width: 40%;
+	padding: 0;
 }
 
 .NewProject__cancel {

@@ -127,7 +127,7 @@ export default class Home extends Component {
           <div className="Menu__wrapper">
             <div className="Menu__account">
               <div className="Menu__avi"></div>
-              <p className="Menu__name">{this.props.user}</p>
+              <p className="Menu__name"></p>
             </div>
             <a className="Menu__button Menu__button--active">
               Dashboard

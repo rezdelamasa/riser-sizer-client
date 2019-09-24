@@ -63,12 +63,10 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    let userObject = {};
-    let email;
     try {
       await Auth.currentSession();
-      userObject = await Auth.currentUserInfo();
-      email = userObject.attributes.email.substring(0, userObject.attributes.email.indexOf('@'));
+      // userObject = await Auth.currentUserInfo();
+      // email = userObject.attributes.email.substring(0, userObject.attributes.email.indexOf('@'));
       this.userHasAuthenticated(true);
     }
     catch(e) {
@@ -78,12 +76,9 @@ class App extends Component {
       console.log(e);
     }
 
-    console.log(email);
-
     this.setState(
       { 
         isAuthenticating: false,
-        user: userObject.attributes
       }
     );
   }
