@@ -76,6 +76,7 @@
 	z-index: 1;
 	justify-content: center;
 	flex: 100% 1 1;
+	height: auto;
 }
 
 .lander__heading {
@@ -339,6 +340,21 @@
 }
 
 @media screen and (min-width: 768px) {
+		
+	.navbar {
+		height: 100px;
+	}
+
+	.navbar__brand {
+		font-size: 3.5rem;
+	}
+
+	.navbar__list > .navbar__link > a {
+		height: 80px;
+		font-size: 2rem;
+		padding: 10px 20px;
+	}
+
 	.feature__text {
 		justify-content: flex-start;
 	}
