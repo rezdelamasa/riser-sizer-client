@@ -12,7 +12,9 @@ class FloorToolbar extends Component {
       label,
       loadValues,
       selectHotSource,
-      selectColdSource
+      selectColdSource,
+      multipleEditEnabled,
+      selectFloor
     } = this.props;
     return (
       <div className="floor__toolbar">
@@ -21,6 +23,8 @@ class FloorToolbar extends Component {
           selectHotSource={selectHotSource}
           selectColdSource={selectColdSource}
           label={label}
+          multipleEditEnabled={multipleEditEnabled}
+          selectFloor={selectFloor}
         />
         <ToolbarInfo 
           loadValues={loadValues}

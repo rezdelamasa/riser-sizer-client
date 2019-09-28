@@ -25,17 +25,20 @@ export default class Projects extends Component {
       isEditing: false,
       riserLabel: "",
       showLabelForm: true,
-      floorFormInput: ""
+      floorFormInput: "",
+      enableMultipleEdit: false
     };
 
     this.handleRiserLabelChange = this.handleRiserLabelChange.bind(this);
     this.handleRiserLabelSubmit = this.handleRiserLabelSubmit.bind(this);
-    this.handleEditRiser = this.handleEditRiser.bind(this);
+    this.handleEditRiser        = this.handleEditRiser.bind(this);
     this.handleFloorLabelChange = this.handleFloorLabelChange.bind(this);
     this.handleFloorLabelSubmit = this.handleFloorLabelSubmit.bind(this);
-    this.onSelectFixtured = this.onSelectFixture.bind(this);
-    this.onBackClick = this.onBackClick.bind(this);
-    this.handleFixtureDelete = this.handleFixtureDelete.bind(this);
+    this.onSelectFixtured       = this.onSelectFixture.bind(this);
+    this.onBackClick            = this.onBackClick.bind(this);
+    this.handleFixtureDelete    = this.handleFixtureDelete.bind(this);
+    this.selectFloor            = this.selectFloor.bind(this);
+    this.enableMultipleEdit     = this.enableMultipleEdit.bind(this);
   }
 
   async componentDidMount() {
@@ -43,6 +46,7 @@ export default class Projects extends Component {
       let attachmentURL;
       const project = await this.getProject();
       const { content } = project;
+      console.log(content);
 
       this.setState({
         project,
@@ -145,7 +149,8 @@ export default class Projects extends Component {
   handleCreateRiser = async event => {
     let initRiserObject = {
       floors: [],
-      isEditingLabel: true
+      isEditingLabel: true,
+      multipleFloorArray: [],
     };
 
     let contentObject = this.state.content;
@@ -279,25 +284,60 @@ export default class Projects extends Component {
   onSelectFixture = async (e, fixture) => {
     let currentRiserObject = this.state.currentRiser;
     let contentObject = this.state.content;
-    if(currentRiserObject.currentFloor.hasOwnProperty("fixtures")) {
-      currentRiserObject.currentFloor.fixtures.push(fixture);
-      currentRiserObject.currentFloor.loadValues.cold += fixture.loadValues.cold;
-      currentRiserObject.currentFloor.loadValues.hot += fixture.loadValues.hot;
+    if(currentRiserObject.multipleFloorArray.length == 0) {
+      if(currentRiserObject.currentFloor.hasOwnProperty("fixtures")) {
+        currentRiserObject.currentFloor.fixtures.push(fixture);
+        currentRiserObject.currentFloor.loadValues.cold += fixture.loadValues.cold;
+        currentRiserObject.currentFloor.loadValues.hot += fixture.loadValues.hot;
+      } else {
+        currentRiserObject.currentFloor.fixtures = [];
+        currentRiserObject.currentFloor.loadValues.cold += fixture.loadValues.cold;
+        currentRiserObject.currentFloor.loadValues.hot += fixture.loadValues.hot;
+        currentRiserObject.currentFloor.fixtures.push(fixture);
+      }
+
+      currentRiserObject.currentFloor.loadValues.cold = Math.round(currentRiserObject.currentFloor.loadValues.cold * 10) / 10;
+      currentRiserObject.currentFloor.loadValues.hot = Math.round(currentRiserObject.currentFloor.loadValues.hot * 10) / 10;
+
+      currentRiserObject.floors.forEach(function(floor, index, array) {
+        if(floor.label == currentRiserObject.currentFloor.label) {
+          array[index] = currentRiserObject.currentFloor;
+        }
+      });
     } else {
-      currentRiserObject.currentFloor.fixtures = [];
-      currentRiserObject.currentFloor.loadValues.cold += fixture.loadValues.cold;
-      currentRiserObject.currentFloor.loadValues.hot += fixture.loadValues.hot;
-      currentRiserObject.currentFloor.fixtures.push(fixture);
+      console.log(currentRiserObject.multipleFloorArray);
+
+      currentRiserObject.multipleFloorArray.forEach(function(mFloor) {
+        if(mFloor.hasOwnProperty("fixtures")) {
+          mFloor.fixtures.push(fixture);
+          mFloor.loadValues.cold += fixture.loadValues.cold;
+          mFloor.loadValues.hot += fixture.loadValues.hot;
+        } else {
+          mFloor.fixtures = [];
+          mFloor.loadValues.cold += fixture.loadValues.cold;
+          mFloor.loadValues.hot += fixture.loadValues.hot;
+          mFloor.fixtures.push(fixture);
+        }
+
+        mFloor.loadValues.cold = Math.round(mFloor.loadValues.cold * 10) / 10;
+        mFloor.loadValues.hot = Math.round(mFloor.loadValues.hot * 10) / 10;
+
+        currentRiserObject.floors.forEach(function(floor, index, array) {
+          if(floor.label == mFloor.label) {
+            array[index] = mFloor;
+          }
+        });
+      });
+
+      this.setState({
+        content: contentObject
+      });
+
+      this.calculateSizes();
     }
 
-    currentRiserObject.currentFloor.loadValues.cold = Math.round(currentRiserObject.currentFloor.loadValues.cold * 10) / 10;
-    currentRiserObject.currentFloor.loadValues.hot = Math.round(currentRiserObject.currentFloor.loadValues.hot * 10) / 10;
-
-    currentRiserObject.floors.forEach(function(floor, index, array) {
-      if(floor.label == currentRiserObject.currentFloor.label) {
-        array[index] = currentRiserObject.currentFloor;
-      }
-    });
+    console.log(currentRiserObject);
+    
 
 
 
@@ -312,6 +352,8 @@ export default class Projects extends Component {
     });
 
     this.calculateSizes();
+
+    console.log(currentRiserObject);
 
     try {
       await this.saveNote({
@@ -382,6 +424,7 @@ export default class Projects extends Component {
     newFloor.label = (Number(highestFloor) + 1) + "";
 
     currentRiserObject.floors.push(newFloor);
+    currentRiserObject.currentFloor = currentRiserObject.floors[currentRiserObject.floors.length - 1];
 
     let contentObject = this.state.content;
     contentObject.risers.forEach(function(riser, index, array) {
@@ -390,6 +433,7 @@ export default class Projects extends Component {
       }
     });
 
+    
 
     this.setState({
       content: contentObject
@@ -421,6 +465,7 @@ export default class Projects extends Component {
     newFloor.label = (Number(lowestFloor) - 1) + "";
 
     currentRiserObject.floors.unshift(newFloor);
+    currentRiserObject.currentFloor = currentRiserObject.floors[0];
 
     let contentObject = this.state.content;
     contentObject.risers.forEach(function(riser, index, array) {
@@ -516,12 +561,7 @@ export default class Projects extends Component {
         }
       });
 
-
-      console.log(coldFloorIndex);
-      console.log(hotFloorIndex);
       riser.floors.forEach(function(floor, index, array) {
-        console.log("floor: " + floor.label);
-        console.log("riser's cold source: " + riser.coldSourceFloor);
 
         floorsAboveColdSource = riser.floors.slice(coldFloorIndex + 1);
         floorsBelowColdSource = riser.floors.slice(0, coldFloorIndex + 1);
@@ -530,17 +570,11 @@ export default class Projects extends Component {
         floorsAboveHotSource = riser.floors.slice(hotFloorIndex + 1);
         floorsBelowHotSource = riser.floors.slice(0, hotFloorIndex + 1);
         floorsAboveHotSource.reverse();
-
-        console.log("floorsBelowColdSource: ");
-        console.log(floorsBelowColdSource);
-        console.log("floorsAboveColdSource: ");
-        console.log(floorsAboveColdSource);
         
 
         if(floorsBelowColdSource) {
           floorsBelowColdSource.forEach(function(floorC) {
             coldLoad +=  floorC.loadValues.cold;
-            console.log("coldLoad below" + coldLoad);
             floorC.totalLoadValues.cold = coldLoad;
             if(floorC.label == floor.label) {
               array[index] = floorC;
@@ -553,7 +587,6 @@ export default class Projects extends Component {
         if(floorsAboveColdSource) {
           floorsAboveColdSource.forEach(function(floorC) {
             coldLoad +=  floorC.loadValues.cold;
-            console.log("coldLoad above" + coldLoad);
             floorC.totalLoadValues.cold = coldLoad;
             if(floorC.label == floor.label) {
               array[index] = floorC;
@@ -566,7 +599,6 @@ export default class Projects extends Component {
         if(floorsBelowHotSource) {
           floorsBelowHotSource.forEach(function(floorH) {
             hotLoad += floorH.loadValues.hot;
-            console.log("hotLoad for below" + hotLoad);
             floorH.totalLoadValues.hot = hotLoad;
             if(floorH.label == floor.label) {
               array[index] = floorH;
@@ -579,8 +611,6 @@ export default class Projects extends Component {
         if(floorsAboveHotSource) {
           floorsAboveHotSource.forEach(function(floorH) {
             hotLoad += floorH.loadValues.hot;
-            console.log("hotLoad floor " + floorH.label + ": " + hotLoad);
-            console.log("load values for " + floorH.label + ": " + floor.loadValues.hot);
             floorH.totalLoadValues.hot = hotLoad;
             if(floorH.label == floor.label) {
               array[index] = floorH;
@@ -589,8 +619,6 @@ export default class Projects extends Component {
         }
 
         hotLoad = 0;
-
-        console.log(floor.totalLoadValues);
 
         // if(Number(floor.label) <= Number(riser.coldSourceFloor)) {
         //   coldLoad += floor.loadValues.cold;
@@ -620,8 +648,6 @@ export default class Projects extends Component {
           } 
             
           if(Math.ceil(floor.totalLoadValues.hot) <= gpm && Math.ceil(floor.totalLoadValues.hot) > array[index - 1]) {
-            console.log("totalLoadValues hot rounded: " + Math.ceil(floor.totalLoadValues.cold));
-              console.log("sizeslist hot index: " + sizesList[index]);
               floor.sizes.hot = sizesList[index];
           } 
             
@@ -711,6 +737,67 @@ export default class Projects extends Component {
     }
   }
 
+  enableMultipleEdit() {
+    console.log("enableMultipleEdit");
+    let enableMultipleEdit = !this.state.enableMultipleEdit;
+    console.log(enableMultipleEdit);
+
+    let currentRiserObject = this.state.currentRiser;
+    if(currentRiserObject.multipleFloorArray.length > 0) {
+      currentRiserObject.multipleFloorArray = [];
+    }
+
+    currentRiserObject.currentFloor = {};
+    
+
+    this.setState({
+      enableMultipleEdit: enableMultipleEdit,
+      currentRiser: currentRiserObject
+    });
+  }
+
+  selectFloor(e, floorLabel) {
+    let content = this.state.content;
+    let currentRiser = this.state.currentRiser;
+    let removed = false;
+
+    console.log(currentRiser);
+
+    if(currentRiser.multipleFloorArray.length == 0) {
+      currentRiser.floors.forEach(function(floor) {
+        if(floor.label === floorLabel) {
+          currentRiser.multipleFloorArray.push(floor);
+          console.log("ok");
+        }
+      });
+    } else {
+      currentRiser.multipleFloorArray.forEach(function(mFloor,
+      index, array) {
+        if(mFloor.label == floorLabel) {
+          console.log("match!!!");
+          array.splice(index, 1);
+          removed = true;
+        } 
+      });
+
+      if(removed == false) {
+        console.log("else statement");
+        currentRiser.floors.forEach(function(floor) {
+          if(floor.label === floorLabel) {
+            currentRiser.multipleFloorArray.push(floor);
+            console.log("ok");
+          }
+        });
+      }
+    }
+
+    console.log(currentRiser);
+
+    this.setState({
+      currentRiser: currentRiser
+    })
+  }
+
   render() {
     return (
       <div className="Projects">
@@ -770,7 +857,9 @@ export default class Projects extends Component {
                   onSelectFixture={this.onSelectFixture}
                   onBackClick={this.onBackClick}
                   handleFixtureDelete={this.handleFixtureDelete}
-
+                  selectFloor={this.selectFloor}
+                  multipleEditEnabled={this.state.enableMultipleEdit}
+                  enableMultipleEdit={this.enableMultipleEdit}
                 />
             }
           </div>

@@ -33,7 +33,10 @@ class Editor extends Component {
       selectHotSource,
       selectColdSource,
       handleFloorLabelChange,
-      handleFixtureDelete
+      handleFixtureDelete,
+      selectFloor,
+      multipleEditEnabled,
+      enableMultipleEdit
     } = this.props;
     return (
       <div className="editor">
@@ -56,6 +59,9 @@ class Editor extends Component {
           selectColdSource={selectColdSource}
           handleFloorLabelChange={handleFloorLabelChange}
           handleFixtureDelete={handleFixtureDelete}
+          selectFloor={selectFloor}
+          multipleEditEnabled={multipleEditEnabled}
+          enableMultipleEdit={enableMultipleEdit}
         />
         <Sidebar 
           onSelectFixture={onSelectFixture}

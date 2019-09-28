@@ -19,6 +19,9 @@ class Toolbar extends Component {
       label,
       addFloorAbove,
       addFloorBelow,
+      handlePrint,
+      enableMultipleEdit,
+      multipleEditEnabled
     } = this.props; 
 
 
@@ -34,6 +37,9 @@ class Toolbar extends Component {
         <ToolbarButtonWrapper 
           addFloorBelow={addFloorBelow}
           addFloorAbove={addFloorAbove}
+          handlePrint={handlePrint}
+          enableMultipleEdit={enableMultipleEdit}
+          multipleEditEnabled={multipleEditEnabled}
         />
       </div>
     );

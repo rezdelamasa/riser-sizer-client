@@ -1,0 +1,10 @@
+.floor__toolbar__buttons {
+	display: flex;
+	flex-direction: row;
+}
+
+.floor__toolbar__button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

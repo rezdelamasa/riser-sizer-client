@@ -13,6 +13,8 @@ class BillingForm extends Component {
       isProcessing: false,
       isCardComplete: false,
     };
+
+    this.handleCancelPurchase = this.handleCancelPurchase.bind(this);
   }
 
   validateForm() {
@@ -48,40 +50,50 @@ class BillingForm extends Component {
     this.props.onSubmit(this.props.clickedTier, { token, error });
   }
 
+  handleCancelPurchase(e) {
+    e.preventDefault();
+    console.log(e);
+    this.props.cancelPurchase();
+  }
+
   render() {
     const loading = this.state.isProcessing || this.props.loading;
 
     return (
-      <form className="BillingForm" onSubmit={this.handleSubmitClick}>
-        <h1>{this.props.clickedTier} Plan</h1>
-        <hr />
-        <FormGroup bsSize="large" controlId="name">
-          <ControlLabel>Cardholder&apos;s name</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.name}
-            onChange={this.handleFieldChange}
-            placeholder="Cardholder Name"
+      <div className="BillingFormContainer">
+        <form className="BillingForm" onSubmit={this.handleSubmitClick}>
+          <h1>Subscription Payment</h1>
+          <hr />
+          <FormGroup bsSize="large" controlId="name">
+            <ControlLabel>Cardholder&apos;s name</ControlLabel>
+            <FormControl
+              type="text"
+              value={this.state.name}
+              onChange={this.handleFieldChange}
+              placeholder="Cardholder Name"
+            />
+          </FormGroup>
+          <ControlLabel>Credit Card Info</ControlLabel>
+          <CardElement
+            className="card-field"
+            onChange={this.handleCardFieldChange}
+            style={{
+              base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
+            }}
           />
-        </FormGroup>
-        <ControlLabel>Credit Card Info</ControlLabel>
-        <CardElement
-          className="card-field"
-          onChange={this.handleCardFieldChange}
-          style={{
-            base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
-          }}
-        />
-        <LoaderButton
-          block
-          bsSize="large"
-          type="submit"
-          text="Purchase"
-          isLoading={loading}
-          loadingText="Purchasing…"
-          disabled={!this.validateForm()}
-        />
-      </form>
+          <LoaderButton
+            block
+            bsSize="large"
+            type="submit"
+            text="Purchase"
+            isLoading={loading}
+            loadingText="Purchasing…"
+            disabled={!this.validateForm()}
+          />
+        </form>
+        <button onClick={this.handleCancelPurchase} className="BillingForm__cancel">x</button>
+      </div>
+      
     );
   }
 }

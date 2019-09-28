@@ -13,10 +13,10 @@ export default class Settings extends Component {
       isLoading: false,
       renderBillingForm: false,
       tier: "Free",
-      clickedTier: ""
     };
 
     this.handleBasicPurchaseClick = this.handleBasicPurchaseClick.bind(this);
+    this.cancelPurchase           = this.cancelPurchase.bind(this);
   }
 
   billUser(details) {
@@ -25,7 +25,7 @@ export default class Settings extends Component {
     });
   }
 
-  handleFormSubmit = async (clickedTier, { token, error }) => {
+  handleFormSubmit = async ({ token, error }) => {
     if (error) {
       alert(error);
       return;
@@ -35,7 +35,6 @@ export default class Settings extends Component {
 
     try {
       await this.billUser({
-        clickedTier,
         source: token.id
       });
 
@@ -66,9 +65,15 @@ export default class Settings extends Component {
   handleBasicPurchaseClick() {
     this.setState({
       renderBillingForm: true,
-      clickedTier: "Basic"
     });
     console.log(this.state.renderBillingForm);
+  }
+
+  cancelPurchase() {
+    console.log("hello");
+    this.setState({
+      renderBillingForm: false
+    });
   }
 
   render() {
@@ -78,7 +83,7 @@ export default class Settings extends Component {
           <div className="Menu__wrapper">
             <div className="Menu__account">
               <div className="Menu__avi"></div>
-              <p className="Menu__name">{this.props.user}</p>
+              <p className="Menu__name"></p>
             </div>
             <a className="Menu__button" href="/">
               Dashboard
@@ -98,20 +103,21 @@ export default class Settings extends Component {
           <h1 className="Settings__heading">Settings</h1>
           <div className="Subscription">
             <h2 className="Subscription__heading">Subscription</h2>
+            <div className="Subscription__content">
+              <p>You are currently using the FREE version of Riser Sizer. You are limited to 1 project. To use the app without restrictions, please consider upgrading to the BASIC version.</p>
+              <button onClick={this.handleBasicPurchaseClick} className="Subscription__button">Subscribe</button>
+            </div>
             {this.state.renderBillingForm &&
               <StripeProvider apiKey={config.STRIPE_KEY}>
                 <Elements>
                   <BillingForm
+                    cancelPurchase={this.cancelPurchase}
                     loading={this.state.isLoading}
                     onSubmit={this.handleFormSubmit}
-                    clickedTier={this.state.clickedTier}
                   />
                 </Elements>
               </StripeProvider>
             }
-            <div className="Subscription__content">
-              <p>You are currently using the FREE version of Riser Sizer. You are limited to 1 project. To use the app without restrictions, please consider upgrading to the BASIC version.</p>
-            </div>
           </div>
           <div className="Features">
             <h2>Features</h2>

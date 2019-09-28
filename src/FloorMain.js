@@ -19,7 +19,9 @@ class FloorMain extends Component {
       selectHotSource,
       selectColdSource,
       loadValues,
-      handleFixtureDelete
+      handleFixtureDelete,
+      multipleEditEnabled,
+      selectFloor
     } = this.props;
 
     return (
@@ -35,6 +37,8 @@ class FloorMain extends Component {
           selectHotSource={selectHotSource}
           selectColdSource={selectColdSource}
           loadValues={loadValues}
+          multipleEditEnabled={multipleEditEnabled}
+          selectFloor={selectFloor}
         />
       </div>
     );

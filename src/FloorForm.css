@@ -1,3 +1,7 @@
+.floor__form {
+	height: unset;
+}
+
 .floor__input {
 	border: 0;
 	background-color: transparent;

@@ -28,7 +28,9 @@ class Floor extends Component {
       sizes,
       handleFloorLabelChange,
       loadValues,
-      handleFixtureDelete
+      handleFixtureDelete,
+      multipleEditEnabled,
+      selectFloor
     } = this.props;
 
     let floorClass = "";
@@ -38,6 +40,15 @@ class Floor extends Component {
     } else {
       floorClass = "floor";
     }
+    
+    if(multipleEditEnabled && currentRiser.multipleFloorArray.length > 0) {
+      currentRiser.multipleFloorArray.forEach(function(floor) {
+        if(floor.label == label) {
+          floorClass = "floor floor--selected";
+        }
+      });
+    } 
+
 
     // if(currentFloor.label === label) {
     //   floorClass += " floor--active";
@@ -90,6 +101,8 @@ class Floor extends Component {
           floorFixtures={floorFixtures}
           loadValues={loadValues}
           handleFixtureDelete={handleFixtureDelete}
+          multipleEditEnabled={multipleEditEnabled}
+          selectFloor={selectFloor}
         />
       </li>
     );

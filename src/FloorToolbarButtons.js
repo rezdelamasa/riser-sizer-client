@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Button from "./Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FaRegCheckSquare } from "react-icons/fa";
+import "./FloorToolbarButtons.css";
 
 class FloorToolbarButtons extends Component {
 
@@ -18,18 +20,32 @@ class FloorToolbarButtons extends Component {
     this.props.selectColdSource(e, this.props.label);
   }
 
+  handleSelectFloor = (e) => {
+    this.props.selectFloor(e, this.props.label);
+  }
+
   render() {
     const { 
       editFloor,
       label,
       selectHotSource,
-      selectColdSource
+      selectColdSource,
+      multipleEditEnabled,
+      selectFloor
     } = this.props;
 
     
 
     return (
       <div className="floor__toolbar__buttons">
+        {this.props.multipleEditEnabled &&
+          <Button 
+            onClick={this.handleSelectFloor}
+            className="floor__toolbar__button floor__toolbar__button--select"
+          >
+            <FaRegCheckSquare></FaRegCheckSquare>
+          </Button>
+        }
         <Button 
           onClick={this.handleEditFloor}
           className="floor__toolbar__button floor__toolbar__button--edit"

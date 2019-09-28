@@ -1,4 +1,65 @@
 .riser {
-	overflow-y: scroll;
-	height: 1000vh;
+
+}
+
+@media print {
+  .riser {
+    position: absolute;
+    margin: 0;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 18px;
+    position: fixed;
+		z-index: 100000;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: flex-end;
+  }
+
+  .toolbar {
+  	visibility: hidden;
+  }
+
+  .Overview {
+  	visibility: hidden;
+  }
+
+  .overview__toolbar {
+  	visibility: hidden;
+  }
+
+  .Sidebar {
+  	visibility: hidden;
+  }
+
+  .fixture__info {
+  	display: none;
+  }
+
+  .fixture__type {
+  	display: none;
+  }
+
+  .fixture__label {
+  	height: 10px;
+  }
+
+  .fixture__delete {
+  	display: none!important;
+  	position: fixed;
+  	top: -100vw;
+  }
+
+  .fixture {
+  	height: 40px!important;
+  	min-height: unset;
+  	min-width: unset;
+  	margin-top: 10px!important;
+  	display: flex;
+  	justify-content: center;
+  }
+
 }

@@ -19,7 +19,10 @@ class RiserWrapper extends Component {
       selectHotSource,
       selectColdSource,
       handleFloorLabelChange,
-      handleFixtureDelete
+      handleFixtureDelete,
+      enableMultipleEdit,
+      selectFloor,
+      multipleEditEnabled
     } = this.props;
 
     return (
@@ -38,6 +41,9 @@ class RiserWrapper extends Component {
           selectColdSource={selectColdSource}
           handleFloorLabelChange={handleFloorLabelChange}
           handleFixtureDelete={handleFixtureDelete}
+          enableMultipleEdit={enableMultipleEdit}
+          selectFloor={selectFloor}
+          multipleEditEnabled={multipleEditEnabled}
         />
       </div>
     );

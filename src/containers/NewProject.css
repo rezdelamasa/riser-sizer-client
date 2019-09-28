@@ -1,14 +1,21 @@
+.App {
+	height: unset;
+	min-height: 100vh;
+}
+
 .NewProject {
 	display: flex;
-	height: 100%;
 	width: 100%;
+	min-height: 100vh;
+	height: 100%;
 	justify-content: center;
 	align-items: flex-start;
-	background-color: #ecf0f1;
+	background-color: #62a3ff;
 	padding: 0 25%;
 	background-image: url(https://res.cloudinary.com/rezdelamasa/image/upload/v1568779719/riser-sizer-bg.svg);
-	background-size: cover;
-	background-position: 60% 100%;
+	background-size: 100%;
+	background-position: 0% 0%;
+	background-repeat: no-repeat;
 }
 
 .NewProject form {
@@ -18,7 +25,7 @@
   width: 100%;
   margin: 0 auto;
   height: unset;
-  margin-top: 20vh;
+  margin: 20vh auto;
   align-items: flex-start;
   background-color: white;
   padding: 100px;
@@ -61,4 +68,51 @@
 
 .NewProject__cancel {
 	font-size: 1.4rem;
+}
+
+.building-settings {
+	width: 100%;
+}	
+
+.building-settings__button {
+	width: 40px; height: 40px;
+	border-radius: 5px;
+	background-color: #eee;
+	border: 2px solid #bbb;
+	font-size: 2rem;
+	color: #555;
+	box-sizing: border-box;
+	padding-top: 5px;
+}
+
+.building-settings__button * {
+	pointer-events: none;
+}
+
+.building-settings__enable {
+	margin-bottom: 50px;
+}
+
+.building-settings__content {
+	border-top: 2px solid #ccc;
+	padding: 50px 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.building-settings__item {
+	flex: 18% 0 0;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+ 
+.building-settings__description {
+	font-size: 1.6rem;
+	color: #777;
+	flex: 100% 1 1;
+}
+
+.control-label {
+	font-size: 1.6rem;
 }

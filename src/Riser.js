@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Floor from "./Floor";
+import "./Riser.css";
 
 class Riser extends Component {
 
@@ -18,7 +19,10 @@ class Riser extends Component {
       selectHotSource,
       selectColdSource,
       handleFloorLabelChange,
-      handleFixtureDelete
+      handleFixtureDelete,
+      enableMultipleEdit,
+      selectFloor,
+      multipleEditEnabled
     } = this.props;
 
     let riser;
@@ -50,6 +54,9 @@ class Riser extends Component {
           handleFloorLabelChange={handleFloorLabelChange}
           floorFixtures={emptyArray}
           handleFixtureDelete={handleFixtureDelete}
+          enableMultipleEdit={enableMultipleEdit}
+          selectFloor={selectFloor}
+          multipleEditEnabled={multipleEditEnabled}
         />
       );
     } else {
@@ -71,6 +78,9 @@ class Riser extends Component {
             handleFloorLabelChange={handleFloorLabelChange}
             handleFloorLabelSubmit={handleFloorLabelSubmit}
             handleFixtureDelete={handleFixtureDelete}
+            enableMultipleEdit={enableMultipleEdit}
+            selectFloor={selectFloor}
+            multipleEditEnabled={multipleEditEnabled}
           />
         )
       );

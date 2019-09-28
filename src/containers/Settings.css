@@ -23,13 +23,12 @@
 
 .Settings form {
 	width: 80%;
-	margin: 100px auto;
+	margin: 0 auto;
 	max-width: unset;
 	display: flex;
 	flex-direction: column;
 	height: unset;
 	background-color: white;
-	padding: 20px 50px;
 }
 
 .Subscription {
@@ -83,9 +82,31 @@ tr:nth-child(even) {
 	font-weight: bold;
 }
 
+.Subscription__content {
+	display: flex;
+	flex-direction: row;
+	margin-top: 20px;
+}
+
 .Subscription p {
 	font-size: 1.8rem;
-	margin-top: 20px;
+	margin: 0;
+}
+
+.Subscription__button {
+	font-size: 2rem;
+	background-color: #4d83fe;
+	color: white;
+	border-radius: 10px;
+	border: none;
+	margin-left: 50px;
+	padding: 0 20px;
+	max-height: 50px;
+}
+
+.Subscription__button:hover {
+	box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+	transform: translateY(-2px);
 }
 
 .Table__heading {

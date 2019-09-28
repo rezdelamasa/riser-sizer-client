@@ -6,6 +6,17 @@ import "./EditingArea.css";
 
 class EditingArea extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
+  handlePrint() {
+    console.log("PRINT");
+    window.print();
+  }
+
+  
+
   render() {
     const {
       initialFloor,
@@ -25,15 +36,21 @@ class EditingArea extends Component {
       selectHotSource,
       selectColdSource,
       handleFloorLabelChange,
-      handleFixtureDelete
+      handleFixtureDelete,
+      selectFloor,
+      multipleEditEnabled,
+      enableMultipleEdit
     } = this.props;
     return (
       <div className="editing-area">
         <Toolbar 
           onBackClick={onBackClick}
-          label={label}
+          label={currentRiser.label}
           addFloorAbove={addFloorAbove}
           addFloorBelow={addFloorBelow}
+          handlePrint={this.handlePrint}
+          enableMultipleEdit={enableMultipleEdit}
+          multipleEditEnabled={multipleEditEnabled}
         />
         <RiserWrapper 
           onChange={onChange}
@@ -49,6 +66,8 @@ class EditingArea extends Component {
           selectColdSource={selectColdSource}
           handleFloorLabelChange={handleFloorLabelChange}
           handleFixtureDelete={handleFixtureDelete}
+          multipleEditEnabled={multipleEditEnabled}
+          selectFloor={selectFloor}
         />
       </div>
     );

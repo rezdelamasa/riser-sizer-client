@@ -30,7 +30,6 @@ export default class Home extends Component {
     }
 
     this.setState({ isLoading: false });
-    console.log(this.props.user);
   }
 
   projects() {
@@ -62,7 +61,7 @@ export default class Home extends Component {
     return (
       <div className="lander">
         {!this.props.isAuthenticated &&
-          <div>
+          <div className="lander__container">
             <div className="lander__header">
               <div className="navbar">
                 <div className="navbar__wrapper">
@@ -84,33 +83,36 @@ export default class Home extends Component {
                 <p>The first tool built for plumbing engineers to size risers.</p>
               </div>
             </div>
-            <div className="lander__row">
-              <div className="lander_column feature">
-                <img className="feature__icon" src="https://res.cloudinary.com/rezdelamasa/image/upload/v1568667490/folder-icon.svg"/>
-                <div className="feature__text">
-                  <h1 className="feature__heading">Manage Projects</h1>
-                  <p className="feature__description">Create, view, and manage all of your projects on your dashboard. Give your project a name, address, and description.</p>
+            <div className="features">
+              <h1 className="features__heading">How RiserSizer helps you</h1>
+              <div className="features__row">
+                <div className="lander_column feature">
+                  <img className="feature__icon" src="https://res.cloudinary.com/rezdelamasa/image/upload/v1568667490/folder-icon.svg"/>
+                  <div className="feature__text">
+                    <h1 className="feature__heading">Manage Projects</h1>
+                    <p className="feature__description">Create, name, view, and manage all of your projects within your dashboard.</p>
+                  </div>
                 </div>
-              </div>
-              <div className="lander_column feature">
-                <img className="feature__icon" src="https://res.cloudinary.com/rezdelamasa/image/upload/v1568684518/create-riser.svg"/>
-                <div className="feature__text">
-                  <h1 className="feature__heading">Create Risers</h1>
-                  <p className="feature__description">Add risers to your project, give it a label, and edit it in the Editor.</p> 
+                <div className="lander_column feature">
+                  <img className="feature__icon" src="https://res.cloudinary.com/rezdelamasa/image/upload/v1568684518/create-riser.svg"/>
+                  <div className="feature__text">
+                    <h1 className="feature__heading">Create Risers</h1>
+                    <p className="feature__description">Add risers to your project, give it a label, and edit it in the Editor.</p> 
+                  </div>
                 </div>
-              </div>
-              <div className="lander_column feature">
-                <img className="feature__icon" src="https://res.cloudinary.com/rezdelamasa/image/upload/v1568688068/create-floor.svg"/>
-                <div className="feature__text">
-                  <h1 className="feature__heading">Create Floors</h1>
-                  <p className="feature__description">Add floors to your risers, label the initial floor then new floors are automatically labeled. Indicate what floor is the source.</p>
+                <div className="lander_column feature">
+                  <img className="feature__icon" src="https://res.cloudinary.com/rezdelamasa/image/upload/v1568688068/create-floor.svg"/>
+                  <div className="feature__text">
+                    <h1 className="feature__heading">Create Floors</h1>
+                    <p className="feature__description">Create floors, edit them, and select hot and cold water source floors.</p>
+                  </div>
                 </div>
-              </div>
-              <div className="lander_column feature">
-                <img className="feature__icon" src="https://res.cloudinary.com/rezdelamasa/image/upload/v1568758367/add-fixture.svg"/>
-                <div className="feature__text">
-                  <h1 className="feature__heading">Add Fixtures</h1>
-                  <p className="feature__description">Add fixtures to your floors and fixture units(FU) will be calculated automatically.</p>
+                <div className="lander_column feature">
+                  <img className="feature__icon" src="https://res.cloudinary.com/rezdelamasa/image/upload/v1568758367/add-fixture.svg"/>
+                  <div className="feature__text">
+                    <h1 className="feature__heading">Add Fixtures</h1>
+                    <p className="feature__description">Add fixtures to your floors and fixture units(FU) will be calculated automatically.</p>
+                  </div>
                 </div>
               </div>
             </div>

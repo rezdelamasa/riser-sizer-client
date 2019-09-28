@@ -11,16 +11,25 @@
   position: relative;	
 	height: 100%;
 	width: 100vw;
-	
+	min-height: 100vh;
+}
+
+.lander__container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 
 .Home .navbar {
 	background-color: transparent;
 }
 
+
+
 .navbar__list li a {
-	padding: 10px 20px;
+	padding: 5px 10px;
 	border-radius: 5px;
+	font-size: 1rem;
 }
 
 .navbar__link--signup a {
@@ -40,7 +49,7 @@
 }
 
 .lander__header {
-	height: 50vw;
+	height: 70vw;
 	max-height: 50vh;
 	position: relative;
 	background-image: url(https://res.cloudinary.com/rezdelamasa/image/upload/v1568779719/riser-sizer-bg.svg);
@@ -49,7 +58,6 @@
 	background-position: 60% 20%;
 	display: flex;
 	flex-direction: column;
-
 }
 
 .lander__header img {
@@ -60,28 +68,31 @@
 }
 
 .lander__text {
-	width: 90%;
+	width: 80%;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	z-index: 1;
-	height: 35vw;
 	justify-content: center;
+	flex: 100% 1 1;
 }
 
 .lander__heading {
   font-family: "Open Sans", sans-serif;
-  font-weight: 600;
-  font-size: 5vw;
+  font-weight: bold;
+  font-size: 3rem;
+  letter-spacing: -1px;
 	margin: 0 auto;
   color: white;
   text-align: left;
   width: 100%;
+  margin-bottom: 1rem;
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.2);
 }
 
 .Home .lander__header p {
-  font-size: 2.4vw;
+  font-size: 1.6rem;
   color: white;
   width: 100%;
 	text-align: left;
@@ -102,7 +113,7 @@
 }
 
 .lander__wrapper {
-	width: 90%;
+	width: 80%;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
@@ -134,7 +145,7 @@
 
 .dashboard {
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	margin: 0 auto;
 	display: flex;
 }
@@ -253,14 +264,30 @@
 	color: white!important;
 }
 
-.lander__row {
+.features {
+	background-color: #fafafa;
+	flex: 100% 1 1;
+}
+
+.features__heading {
+	font-size: 2.8rem;
+	margin: 0 auto;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 100px;
+	color: #666;
+	margin-top: 100px;
+	width: 80%;
+}
+
+.features__row {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	width: 90%;
+	width: 84%;
 	margin: 0 auto;
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 .feature {
@@ -268,27 +295,33 @@
 	flex-direction: column;
 	width: 100%;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-start;
 	margin: 0 auto;
-	margin-bottom: 100px;
+	margin-bottom: 50px;
 	flex-wrap: nowrap;
+	/*background-color: white;
+	box-sizing: border-box;
+	padding: 40px 20px;
+	border-radius: 10px;
+	box-shadow: 0 8px 14px rgba(0,0,0,0.07);*/
 }
 
 .feature__heading {
 	color: #4D83FE;
 	/*color: #333;*/
-	font-size: 2.6rem;
+	font-size: 1.8rem;
 	font-weight: bold;
 	text-align: center;
 }
 
 .feature__icon {
-	width: 30vw; height: 30vw;
-	max-width: 300px;
-	max-height: 300px;
+	width: 25vw; height: 25vw;
+	max-width: 200px;
+	max-height: 200px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-bottom: 20px;
 }
 
 .feature__text {
@@ -300,9 +333,9 @@
 
 .feature__description {
 	text-align: center;
-	font-size: 1.8rem;
+	font-size: 1.2rem;
 	color: #444;
-	max-width: 500px;
+	max-width: 60%;
 }
 
 @media screen and (min-width: 768px) {
@@ -310,9 +343,33 @@
 		justify-content: flex-start;
 	}
 
+	.features__row {
+		flex-direction: row;
+	}
+
+	.feature {
+		width: 50%;
+	}
+
 	.feature__icon {
 		width: 20vw;
 		height: 20vw;
+	}
+
+	.features__heading {
+		font-size: 3.5rem;
+	}
+
+	.lander__header {
+		max-height: 70vh;
+	}
+
+	.lander__heading {
+		font-size: 5rem;
+	}
+
+	.Home .lander__header p {
+		font-size: 2rem;
 	}
 }
 
@@ -322,20 +379,34 @@
 		font-size: 7rem;
 	}
 
- 	.lander__row {
+ 	.features__row {
  		flex-direction: row;
+ 		flex-wrap: wrap;
+ 	}
+
+ 	.features__heading {
+ 		font-size: 5rem;
  	}
 
 	.feature {
-		width: 50%;
+		width: 20%;
 	}
 
 	.feature__icon {
 		width: 10vw; height: 10vw;
 	}
 
-	.navbar__wrapper, .lander__text, .lander__row {
-		max-width: 1200px;
+	.feature__description {
+		max-width: 100%;
+		font-size: 1.6rem;
+	}
+
+	.navbar__wrapper, .lander__text, .features__row {
+		max-width: 1400px;
+	}
+
+	.features__row {
+		max-width: 1500px;
 	}
 
 	.Home .lander__header p {
@@ -343,3 +414,8 @@
 	}
 
 }
+
+@media screen and (min-width: 1600px) {
+	
+}
+
