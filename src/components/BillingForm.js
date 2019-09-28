@@ -47,7 +47,7 @@ class BillingForm extends Component {
 
     this.setState({ isProcessing: false });
 
-    this.props.onSubmit(this.props.clickedTier, { token, error });
+    this.props.onSubmit({ token, error });
   }
 
   handleCancelPurchase(e) {

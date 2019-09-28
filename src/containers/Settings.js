@@ -54,7 +54,6 @@ export default class Settings extends Component {
             <BillingForm
               loading={this.state.isLoading}
               onSubmit={this.handleFormSubmit}
-              clickedTier={this.state.clickedTier}
             />
           </Elements>
         </StripeProvider>
