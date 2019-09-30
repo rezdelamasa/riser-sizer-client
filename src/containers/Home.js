@@ -12,7 +12,10 @@ export default class Home extends Component {
 
     this.state = {
       isLoading: true,
-      projects: []
+      user: {
+        projects: [],
+        subscription: false
+      }
     };
   }
 
@@ -22,9 +25,9 @@ export default class Home extends Component {
     }
 
     try {
-      const projects = await this.projects();
-      this.setState({ projects });
-      console.log(this.state.projects);
+      const user = await this.user();
+      this.setState({ user });
+      console.log(this.state.user);
     } catch (e) {
       alert(e);
     }
@@ -32,12 +35,12 @@ export default class Home extends Component {
     this.setState({ isLoading: false });
   }
 
-  projects() {
-    return API.get("riser-sizer", "/riser-sizer");
+  user() {
+    return API.get("riser-sizer", "/riser-sizer-user-properties");
   }
 
 
-  renderProjectsList(projects) {
+  renderUserProjects(projects) {
     return [{}].concat(projects).map(
       (project, i) =>
         i !== 0 &&
@@ -154,7 +157,7 @@ export default class Home extends Component {
               </a>
             </div>
             <ListGroup className="projects__list">
-              {!this.state.isLoading && this.renderProjectsList(this.state.projects)}
+              {!this.state.isLoading && this.renderUserProjects(this.state.user.projects)}
             </ListGroup>
           </div>
         </div>

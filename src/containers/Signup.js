@@ -20,7 +20,8 @@ export default class Signup extends Component {
       confirmPassword: "",
       confirmationCode: "",
       newUser: null,
-      showConfirmationForm: false
+      showConfirmationForm: false,
+      subscription: false
     };
 
     this.renderConfirmationForm = this.renderConfirmationForm.bind(this);

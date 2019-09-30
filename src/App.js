@@ -31,8 +31,8 @@ class App extends Component {
       isAuthenticated: false,
       isAuthenticating: true,
       user: {
-        email: '',
-        membership: ''
+        subscription: '',
+        projects: [],
       },
     };
 
@@ -973,45 +973,6 @@ class App extends Component {
       handleLogout: this.handleLogout,
     }; 
 
-    let page;
-    if(this.state.visible === "Overview") {
-      page = 
-        <Overview 
-          onClick={() => this.onCreate()}
-          risers={this.state.risers}
-          handleRiserFormChange={() => this.handleRiserFormChange}
-          handleRiserFormSubmit={() => this.handleRiserFormSubmit}
-          showForm={this.state.showForm}
-          editRiser={(e, id) => this.editRiser(e, id)}
-          highestColdRange={this.state.highestColdRange}
-          highestHotRange={this.state.highestHotRange}
-          topColdFloor={this.state.topColdFloor}
-          topHotFloor={this.state.topHotFloor}
-          bottomHotFloor={this.state.bottomHotFloor}
-          bottomColdFloor={this.state.bottomColdFloor}
-          totalFloorRange={this.state.totalFloorRange}
-          highestFloor={this.state.highestFloor}
-          lowestFloor={this.state.lowestFloor}
-        />;
-    } else if(this.state.visible === "Editor") {
-      page = (
-        <Editor 
-          onSelectFixture={this.onSelectFixture}
-          onChange={this.handleFloorChange}
-          label={this.state.currentRiser.label}
-          onBackClick={this.onBackClick}
-          currentRiser={this.state.currentRiser}
-          handleFloorFormChange={this.handleFloorFormChange}
-          handleFloorFormSubmit={this.handleFloorFormSubmit}
-          addFloorAbove={this.addFloorAbove}
-          addFloorBelow={this.addFloorBelow}
-          currentFloor={this.state.currentFloor}
-          editFloor={(e, id) => this.editFloor(e, id)}
-          selectHotSource={(e, id) => this.selectHotSource(e, id)}
-          selectColdSource={(e, id) => this.selectColdSource(e, id)}
-        />
-      );
-    }
     return (
       !this.state.isAuthenticating &&
       <div className="App">

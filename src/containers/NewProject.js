@@ -5,6 +5,7 @@ import { API } from "aws-amplify";
 import config from "../config";
 import "./NewProject.css";
 import { FaCheck } from "react-icons/fa";
+import uuid from "uuid";
 
 export default class NewProject extends Component {
   constructor(props) {
@@ -104,18 +105,21 @@ export default class NewProject extends Component {
 
     console.log(this.state);
 
+    let projectObject = this.state;
+    projectObject.id = uuid.v1();
+
+    let user = {
+      projects: []
+    }
+
+    user.projects.push(projectObject);
+
+    console.log(user);
+
     try {
       await this.createProject({
         content: {
-          name: this.state.name,
-          risers: this.state.risers,
-          address: this.state.address,
-          description: this.state.description,
-          buildingRiserCount: this.state.buildingRiserCount,
-          buildingFloorCount: this.state.buildingFloorCount,
-          buildingFirstFloor: this.state.buildingFirstFloor,
-          buildingHotSourceFloor: this.state.buildingHotSourceFloor,
-          buildingColdSourceFloor: this.state.buildingColdSourceFloor
+          user: user
         }
       });
       console.log(this.state.name);
@@ -126,9 +130,9 @@ export default class NewProject extends Component {
     }
   }
 
-  createProject(project) {
-    return API.post("riser-sizer", "/riser-sizer", {
-      body: project
+  createProject(user) {
+    return API.post("riser-sizer", "/riser-sizer-user-properties", {
+      body: user
     });
   }
 

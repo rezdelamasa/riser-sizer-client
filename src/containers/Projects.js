@@ -9,6 +9,7 @@ import Editor from "../Editor";
 import "./Projects.css";
 import sizesList from "../sizes.js";
 import gpmsList from "../gpms.js";
+import uuid from "uuid";
 
 export default class Projects extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ export default class Projects extends Component {
   }
 
   getProject() {
-    return API.get("riser-sizer", `/riser-sizer/${this.props.match.params.id}`);
+    return API.get("riser-sizer", `/riser-sizer-user-properties`);
   }
 
   validateForm() {
@@ -91,7 +92,7 @@ export default class Projects extends Component {
   }
 
   saveNote(project) {
-    return API.put("riser-sizer", `/riser-sizer/${this.props.match.params.id}`, {
+    return API.put("riser-sizer", `/riser-sizer-user-properties/${this.props.match.params.id}`, {
       body: project
     });
   }
