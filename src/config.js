@@ -7,7 +7,7 @@ const dev = {
     REGION: "us-east-2",
     USER_POOL_ID: "us-east-2_mVt3wyBgs",
     APP_CLIENT_ID: "4815kv17tq6i2qg3lnac8m3mcl",
-    IDENTITY_POOL_ID: "us-east-2:fcb81170-15a4-458b-9315-6c123430c1b6"
+    IDENTITY_POOL_ID: "us-east-2:f5c414c9-d5b3-4d72-9e80-94680fd70ae3"
   },
   STRIPE_KEY: "pk_test_kqUUn0aeDLZh8ApHC7KR2Klh00jVqtwMFe",
 };
