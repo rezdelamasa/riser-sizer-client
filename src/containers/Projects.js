@@ -27,7 +27,7 @@ export default class Projects extends Component {
       riserLabel: "",
       showLabelForm: true,
       floorFormInput: "",
-      enableMultipleEdit: false
+      enableMultipleEdit: false,
     };
 
     this.handleRiserLabelChange = this.handleRiserLabelChange.bind(this);
@@ -53,6 +53,7 @@ export default class Projects extends Component {
         project,
         content,
       });
+      console.log(content);
     } catch (e) {
       alert(e);
     }

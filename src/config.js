@@ -1,12 +1,12 @@
 const dev = {
   apiGateway: {
     REGION: "us-east-2",
-    URL: "https://bkmqpk3zdf.execute-api.us-east-2.amazonaws.com/dev"
+    URL: "https://hsp42xehj4.execute-api.us-east-2.amazonaws.com/dev"
   },
   cognito: {
     REGION: "us-east-2",
-    USER_POOL_ID: "us-east-2_mVt3wyBgs",
-    APP_CLIENT_ID: "4815kv17tq6i2qg3lnac8m3mcl",
+    USER_POOL_ID: "us-east-2_Rz8fNFYYZ",
+    APP_CLIENT_ID: "7kadb9jlrsmjl1kt1uf4nslq61",
     IDENTITY_POOL_ID: "us-east-2:f5c414c9-d5b3-4d72-9e80-94680fd70ae3"
   },
   STRIPE_KEY: "pk_test_kqUUn0aeDLZh8ApHC7KR2Klh00jVqtwMFe",
