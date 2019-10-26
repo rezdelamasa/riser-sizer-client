@@ -178,13 +178,15 @@
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 50px;
+	box-sizing: border-box;
+	padding: 0 1.65%;
 }
 
 .dashboard__subheading {
 	margin: 0;
 	font-size: 3.2rem;
 	font-weight: bold;
-	color: #333;
+	color: #4d83fe;
 }
 
 .subsection__link {

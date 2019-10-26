@@ -45,9 +45,23 @@ export default class Projects extends Component {
   async componentDidMount() {
     try {
       let attachmentURL;
-      const project = await this.getProject();
-      const { content } = project;
+      const data = await this.getProject();
+      const { content } = data;
       console.log(content);
+
+      let url = window.location.href;
+      var projectId = url.split("/").pop();
+
+      console.log(projectId);
+
+      let project;
+      content.user.projects.forEach(function(p) {
+        if(p.id === projectId) {
+          project = p;
+        }
+      });
+
+      console.log(project);
 
       this.setState({
         project,
@@ -93,7 +107,7 @@ export default class Projects extends Component {
   }
 
   saveNote(project) {
-    return API.put("riser-sizer", `/riser-sizer-user-properties/${this.props.match.params.id}`, {
+    return API.put("riser-sizer", `/riser-sizer-user-properties`, {
       body: project
     });
   }
@@ -143,7 +157,7 @@ export default class Projects extends Component {
   } 
 
   addRiser(project) {
-    return API.put("riser-sizer", `/riser-sizer/${this.props.match.params.id}`, {
+    return API.put("riser-sizer", `/riser-sizer-user-properties`, {
       body: project
     });
   }
@@ -155,35 +169,43 @@ export default class Projects extends Component {
       multipleFloorArray: [],
     };
 
+    let projectObject = this.state.project;
+
     let contentObject = this.state.content;
     
-    if(!contentObject.risers) {
-      contentObject.risers = [];
+    if(!projectObject.risers) {
+      projectObject.risers = [];
     }
-    contentObject.risers.push(initRiserObject);
+    projectObject.risers.push(initRiserObject);
+
+    console.log(contentObject);
 
     this.setState({
-      content: contentObject
+      content: contentObject,
+      project: projectObject
     });
 
-    try {
-      await this.addRiser({
-        content: contentObject
-      });
-    } catch (e) {
-      alert(e);
-    }
+    // try {
+    //   await this.addRiser({
+    //     content: contentObject
+    //   });
+    // } catch (e) {
+    //   alert(e);
+    // }
   }
 
   handleEditRiser(e, riserLabel) {
+    let projectObject = this.state.project;
+
     let contentObject = this.state.content;
     let currentRiserObject;
-    contentObject.risers.forEach(function(riser) {
+    projectObject.risers.forEach(function(riser) {
       if(riser.label == riserLabel.riserLabel) {
         currentRiserObject = riser;
       }
     });
 
+    console.log(projectObject);
     
     if(currentRiserObject.floors.length === 0) {
       let initFloorObject = {
@@ -216,14 +238,14 @@ export default class Projects extends Component {
   handleRiserLabelSubmit = async (e, riserIndex) => {
     e.preventDefault();
 
-    let contentObject = this.state.content;
+    let projectObject = this.state.project;
     let riserLabel = this.state.riserLabel;
 
     // loop through array of objects
     // check if inputted riser label exists
     // if exists, prompt user to enter another one.  
 
-    contentObject.risers.forEach(function(riser) {
+    projectObject.risers.forEach(function(riser) {
       while(riserLabel === riser.label) {
         let newLabel = prompt("A riser with that label already exists. Please select another.");
         riserLabel = newLabel;
@@ -231,11 +253,14 @@ export default class Projects extends Component {
 
     });
 
-    contentObject.risers[riserIndex].label = riserLabel; 
-    contentObject.risers[riserIndex].isEditingLabel = false; 
+    projectObject.risers[riserIndex].label = riserLabel; 
+    projectObject.risers[riserIndex].isEditingLabel = false; 
+
+    console.log(projectObject);
 
     this.setState({
-      content: contentObject,
+      content: this.updateContent(projectObject),
+      project: projectObject
     })
 
     try {
@@ -245,6 +270,21 @@ export default class Projects extends Component {
     } catch (e) {
       alert(e);
     }
+
+  }
+
+  updateContent(project) {
+
+    let contentObject = this.state.content;
+
+    contentObject.user.projects.forEach(function(p, index, array) {
+      console.log(p);
+      if(p.id == project.id) {
+        array[index] = project;
+      }
+    });
+
+    return contentObject;
 
   }
 
@@ -261,14 +301,17 @@ export default class Projects extends Component {
     let contentObject = this.state.content;
     currentRiserObject.floors[0].label = this.state.floorFormInput;
     currentRiserObject.currentFloor = currentRiserObject.floors[0];
-    contentObject.risers.forEach(function(riser, index, array) {
+
+    let projectObject = this.state.project;
+    
+    projectObject.risers.forEach(function(riser, index, array) {
       if(currentRiserObject.label === riser.label) {
         array[index] =  currentRiserObject;
       }
     });
 
     this.setState({
-      content: contentObject,
+      content: this.updateContent(projectObject),
     });
     
 
@@ -331,26 +374,22 @@ export default class Projects extends Component {
         });
       });
 
-      this.setState({
-        content: contentObject
-      });
-
       this.calculateSizes();
     }
 
     console.log(currentRiserObject);
     
 
+    let projectObject = this.state.project; 
 
-
-    contentObject.risers.forEach(function(riser, index, array) {
+    projectObject.risers.forEach(function(riser, index, array) {
       if(riser.label == currentRiserObject.label) {
         array[index] = currentRiserObject;
       }
     });
 
     this.setState({
-      content: contentObject
+      content: this.updateContent(projectObject) 
     });
 
     this.calculateSizes();
@@ -485,13 +524,13 @@ export default class Projects extends Component {
 
   selectHotSource = async (e, floorIndex) => {
     let currentRiserObject = this.state.currentRiser;
-    let contentObject = this.state.content;
+    let projectObject = this.state.project;
 
     currentRiserObject.hotSourceFloor = floorIndex;
 
-    contentObject.currentRiser = currentRiserObject;
+    projectObject.currentRiser = currentRiserObject;
 
-    contentObject.risers.forEach(function(riser, index, array) {
+    projectObject.risers.forEach(function(riser, index, array) {
       if(riser.label == currentRiserObject.label) {
         array[index] = currentRiserObject;
       }
@@ -499,9 +538,9 @@ export default class Projects extends Component {
 
     this.setState({
       currentRiser: currentRiserObject,
-      content: contentObject
+      content: this.updateContent(projectObject)
     })
-  
+ 
     try {
       await this.saveNote({
         content: this.state.content
@@ -514,13 +553,13 @@ export default class Projects extends Component {
 
   selectColdSource = async (e, floorIndex) => {
     let currentRiserObject = this.state.currentRiser;
-    let contentObject = this.state.content;
+    let projectObject = this.state.project;
 
     currentRiserObject.coldSourceFloor = floorIndex;
 
-    contentObject.currentRiser = currentRiserObject;
+    projectObject.currentRiser = currentRiserObject;
 
-    contentObject.risers.forEach(function(riser, index, array) {
+    projectObject.risers.forEach(function(riser, index, array) {
       if(riser.label == currentRiserObject.label) {
         array[index] = currentRiserObject;
       }
@@ -528,9 +567,9 @@ export default class Projects extends Component {
 
     this.setState({
       currentRiser: currentRiserObject,
-      content: contentObject
+      content: this.updateContent(projectObject)
     })
-  
+ 
     try {
       await this.saveNote({
         content: this.state.content
@@ -543,9 +582,9 @@ export default class Projects extends Component {
 
   calculateSizes() {
 
-    let contentObject = this.state.content;
+    let projectObject = this.state.project;
 
-    contentObject.risers.forEach(function(riser) {
+    projectObject.risers.forEach(function(riser) {
       let coldLoad = 0;
       let hotLoad = 0;
       let coldFloorIndex;
@@ -658,9 +697,9 @@ export default class Projects extends Component {
 
     });
 
-
     this.setState({
-      content: contentObject
+      content: this.updateContent(projectObject),
+      project: projectObject
     })
   }
 
@@ -800,6 +839,8 @@ export default class Projects extends Component {
     })
   }
 
+// <p className="Menu__name">{this.state.user.email}</p>
+
   render() {
     return (
       <div className="Projects">
@@ -807,8 +848,6 @@ export default class Projects extends Component {
           <div className="Projects__Menu">
             <div className="Menu__wrapper">
               <div className="Menu__account">
-                <div className="Menu__avi"></div>
-                <p className="Menu__name"></p>
               </div>
               <a className="Menu__button" href="/">
                 Dashboard
@@ -829,7 +868,7 @@ export default class Projects extends Component {
         {this.state.project &&
           <div className="Projects__wrapper">
             <OverviewToolbar 
-              projectName={this.state.content.name}
+              projectName={this.state.project.name}
               handleSubmit={this.handleSubmit}
               handleChange={this.handleChange}
               validateForm={this.validateForm}
@@ -840,7 +879,7 @@ export default class Projects extends Component {
             />
             {!this.state.isEditing 
               ? <Overview 
-                  risers={this.state.content.risers}
+                  risers={this.state.project.risers}
                   handleEditRiser={this.handleEditRiser}
                   handleRiserLabelSubmit={this.handleRiserLabelSubmit}
                   handleRiserLabelChange={this.handleRiserLabelChange}

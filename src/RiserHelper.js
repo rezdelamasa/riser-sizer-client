@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 import Button from "./Button";
+import { MdEdit } from "react-icons/md";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 import "./RiserHelper.css";
 
@@ -111,14 +113,13 @@ class RiserHelper extends Component {
             className={'button--edit'}
             onClick={(e, id) => {handleEditRiser(e, {riserLabel})}}
           >
-            Edit
-            <p className="button__arrow">></p>
+            <MdEdit></MdEdit>
           </Button>
           <Button
             className={'button--delete'}
             onClick={this.handleDelete}
           >
-            Delete
+            <IoIosCloseCircleOutline></IoIosCloseCircleOutline>
           </Button>
         </div>
         

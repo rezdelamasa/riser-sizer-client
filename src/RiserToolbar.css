@@ -1,5 +1,5 @@
 .riser__toolbar {
-	width: 100%;
+	flex: 20% 0 0;
   display: flex;
   flex-direction: column;
   justify-content: center;

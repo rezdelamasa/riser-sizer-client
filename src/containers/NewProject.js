@@ -17,7 +17,6 @@ export default class NewProject extends Component {
       risers: [],
       address: "",
       description: "",
-      buildingSettingsFlag: false,
       buildingRiserCount: 0,
       buildingFloorCount: 0,
       buildingHotSourceFloor: "",
@@ -58,7 +57,8 @@ export default class NewProject extends Component {
 
     let stateRiserObject = this.state.risers;
 
-    for(let i = 0; i < this.state.buildingRiserCount; i++) {
+    if(!this.state.buildingRiserCount == 0) {
+      for(let i = 0; i < this.state.buildingRiserCount; i++) {
       let initRiserObject = {
         floors: [],
         label: "",
@@ -68,33 +68,46 @@ export default class NewProject extends Component {
       }
       initRiserObject.label = i + 1;
       initRiserObject.label += "";
-      initRiserObject.coldSourceFloor = this.state.buildingColdSourceFloor
-      initRiserObject.hotSourceFloor = this.state.buildingHotSourceFloor
+      if(this.state.buildingColdSourceFloor != "") {
+        initRiserObject.coldSourceFloor = this.state.buildingColdSourceFloor
+      }
+      if(this.state.buildingHotSourceFloor != "") {
+        initRiserObject.hotSourceFloor = this.state.buildingHotSourceFloor
+      }
+      if(this.state.buildingFloorCount != 0) {
+        initRiserObject.buildingFloorCount = this.state.buildingFloorCount
+      }
+      if(this.state.buildingFirstFloor != "") {
+        initRiserObject.buildingFirstFloor = this.state.buildingFirstFloor
+      }
       console.log(initRiserObject);
-      for(let i = Number(this.state.buildingFirstFloor); i < (Number(this.state.buildingFirstFloor) + Number(this.state.buildingFloorCount)); i++) {
-        let initFloorObject = {
-          label: "",
-          fixtures: [],
-          loadValues: {
-            cold: 0,
-            hot: 0
-          },
-          sizes: {
-            cold: 0,
-            hot: 0
-          },
-          totalLoadValues: {
-            cold: 0,
-            hot: 0
+      if(initRiserObject.buildingFirstFloor && initRiserObject.buildingFloorCount) {
+        for(let i = Number(initRiserObject.buildingFirstFloor); i < (Number(initRiserObject.buildingFirstFloor) + Number(this.state.buildingFloorCount)); i++) {
+          let initFloorObject = {
+            label: "",
+            fixtures: [],
+            loadValues: {
+              cold: 0,
+              hot: 0
+            },
+            sizes: {
+              cold: 0,
+              hot: 0
+            },
+            totalLoadValues: {
+              cold: 0,
+              hot: 0
+            }
           }
+          initFloorObject.label = i;
+          initFloorObject.label += "";
+          console.log(initFloorObject);
+          initRiserObject.floors.push(initFloorObject);
         }
-        initFloorObject.label = i;
-        initFloorObject.label += "";
-        console.log(initFloorObject);
-        initRiserObject.floors.push(initFloorObject);
       }
       console.log(initRiserObject);
       stateRiserObject.push(initRiserObject);
+    }
     }
 
     console.log(stateRiserObject);
@@ -105,8 +118,15 @@ export default class NewProject extends Component {
 
     console.log(this.state);
 
-    let projectObject = this.state;
+    let projectObject = {};
+    projectObject.name = this.state.name;
+    projectObject.address = this.state.address;
+    projectObject.description = this.state.description;
+    projectObject.risers = this.state.risers;
+    projectObject.isLoading = false;
     projectObject.id = uuid.v1();
+    projectObject.createdAt = Date.now();
+    console.log(projectObject.id);
 
     let user = {
       projects: []
@@ -117,9 +137,13 @@ export default class NewProject extends Component {
     console.log(user);
 
     try {
+      let user = await this.user();
+      console.log(user);
+      user.content.user.projects.push(projectObject);
+      console.log(user);
       await this.createProject({
         content: {
-          user: user
+          user: user.content.user
         }
       });
       console.log(this.state.name);
@@ -128,6 +152,10 @@ export default class NewProject extends Component {
       alert(e);
       this.setState({ isLoading: false });
     }
+  }
+
+  user() {
+    return API.get("riser-sizer", "/riser-sizer-user-properties");
   }
 
   createProject(user) {
@@ -171,30 +199,20 @@ export default class NewProject extends Component {
             />
           </FormGroup>
           <div className="building-settings">
-            <div className="building-settings__enable">
-              <label className="control-label">Enable Building Settings</label>
-              <p className="building-settings__description">Enable this for extra settings that will apply to the whole building, like number of risers, floors, and hot and cold source floors.</p>
-              <button className="building-settings__button" id="buildingSettingsFlag" onClick={this.handleEnableClick}>
-                {this.state.buildingSettingsFlag &&
-                  <FaCheck></FaCheck>
-                }
-              </button>
-            </div>
-            
-            {this.state.buildingSettingsFlag &&
-              <div className="building-settings__content">
-                <div className="building-settings__item">
-                  <FormGroup controlId="buildingRiserCount">
-                    <ControlLabel>Riser Count</ControlLabel>
-                    <p className="building-settings__description">Create the specified nubmer of empty risers, ready to edit.</p>
-                    <FormControl
-                      onChange={this.handleChange}
-                      value={this.state.buildingRiserCount}
-                      type="number"
-                      placeholder="How many risers?"
-                    />
-                  </FormGroup>
-                </div>
+            <div className="building-settings__content">
+              <div className="building-settings__item">
+                <FormGroup controlId="buildingRiserCount">
+                  <ControlLabel>Riser Count</ControlLabel>
+                  <p className="building-settings__description">Create the specified nubmer of empty risers, ready to edit.</p>
+                  <FormControl
+                    onChange={this.handleChange}
+                    value={this.state.buildingRiserCount}
+                    type="number"
+                    placeholder="How many risers?"
+                  />
+                </FormGroup>
+              </div>
+              <div className="building-settings__group">
                 <div className="building-settings__item">
                   <FormGroup controlId="buildingFloorCount"> 
                     <ControlLabel>Floor Count</ControlLabel>
@@ -210,7 +228,7 @@ export default class NewProject extends Component {
                 <div className="building-settings__item">
                   <FormGroup controlId="buildingFirstFloor"> 
                     <ControlLabel>First Floor</ControlLabel>
-                    <p className="building-settings__description">Indicate the floor where the risers begin, from the ground up.</p>
+                    <p className="building-settings__description">Indicate the floor where the risers begin, from the bottom.</p>
                     <FormControl
                       onChange={this.handleChange}
                       value={this.state.buildingFirstFloor}
@@ -219,6 +237,8 @@ export default class NewProject extends Component {
                     />
                   </FormGroup>
                 </div>
+              </div>
+              <div className="building-settings__group">
                 <div className="building-settings__item">
                   <FormGroup controlId="buildingColdSourceFloor">
                     <ControlLabel>Cold Source Floor</ControlLabel>
@@ -244,7 +264,7 @@ export default class NewProject extends Component {
                   </FormGroup>
                 </div>
               </div>
-            }
+            </div>
           </div>
           <div className="NewProject__buttons">
             <a href="/" className="NewProject__cancel">Cancel</a>

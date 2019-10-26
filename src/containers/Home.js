@@ -26,7 +26,7 @@ export default class Home extends Component {
 
     try {
       const user = await this.user();
-      this.setState({ user });
+      this.setState({ user: user.content.user });
       console.log(this.state.user);
     } catch (e) {
       alert(e);
@@ -41,18 +41,19 @@ export default class Home extends Component {
 
 
   renderUserProjects(projects) {
+    console.log(projects);
     return [{}].concat(projects).map(
       (project, i) =>
         i !== 0 &&
            <LinkContainer
               key={project.projectId}
-              to={`/projects/${project.projectId}`}
+              to={`/projects/${project.id}`}
             >
-              <ListGroupItem header={project.content.name}>
-                {project.content.address &&
-                  <p className="project__address">{project.content.address}</p>
+              <ListGroupItem header={project.name}>
+                {project.address &&
+                  <p className="project__address">{project.address}</p>
                 }
-                <p>{"Risers: " + project.content.risers.length}</p>
+                <p>{"Risers: " + project.risers.length}</p>
                 <p className="project__date">{"Created: " + new Date(project.createdAt).toDateString()}</p>
               </ListGroupItem>
             </LinkContainer>
@@ -131,8 +132,7 @@ export default class Home extends Component {
         <div className="Projects__Menu">
           <div className="Menu__wrapper">
             <div className="Menu__account">
-              <div className="Menu__avi"></div>
-              <p className="Menu__name"></p>
+              <p className="Menu__name">{this.state.user.email}</p>
             </div>
             <a className="Menu__button Menu__button--active">
               Dashboard

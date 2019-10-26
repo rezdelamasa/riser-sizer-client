@@ -101,6 +101,17 @@
 	flex-direction: column;
 }
 
+.building-settings__group {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+}
+
+.building-settings__group .building-settings__item {
+	flex: 45% 0 1;
+}
+
 .building-settings__item {
 	display: flex;
 	flex-direction: column;
@@ -119,10 +130,4 @@
 
 .control-label {
 	font-size: 1.6rem;
-}
-
-@media screen and (min-width: 1200px) {
-	.building-settings__content {
-		flex-direction: row;
-	}
 }

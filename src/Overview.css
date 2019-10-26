@@ -2,6 +2,7 @@
 	flex-grow: 1;
 	height: unset;
 	width: 100%;
-	flex-direction: row;
+	flex-direction: column;
 	overflow-x: hidden;
+	overflow-y: hidden;
 }

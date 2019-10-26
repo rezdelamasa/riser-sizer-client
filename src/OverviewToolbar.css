@@ -12,6 +12,7 @@
 	max-width: 100%;
 	width: 90%;
 	margin: 0 auto;
+	flex-shrink: 0;
 }
 
 .overview__toolbar-wrapper {
