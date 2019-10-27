@@ -145,10 +145,27 @@ export default class Projects extends Component {
       return;
     }
 
-    this.setState({ isDeleting: true });
+    let projectObject = this.state.project;
+
+    let contentObject = this.state.content;
+
+    contentObject.user.projects.forEach(function(project, index, array) {
+      if(project.id === projectObject.id) {
+        array.splice(index, 1);
+      }
+    })
+
+    console.log(contentObject.user.projects);
+
+    this.setState({ 
+      isDeleting: true,
+      content:contentObject
+    });
 
     try {
-      await this.deleteProject();
+      await this.saveNote({
+        content: this.state.content
+      })
       this.props.history.push("/");
     } catch (e) {
       alert(e);
@@ -176,7 +193,12 @@ export default class Projects extends Component {
     if(!projectObject.risers) {
       projectObject.risers = [];
     }
-    projectObject.risers.push(initRiserObject);
+    console.log(projectObject.risers);
+    if(!projectObject.risers[projectObject.risers.length - 1].label) {
+      alert("The previously created riser has not been labelled yet.");
+    } else {
+      projectObject.risers.push(initRiserObject);
+    }
 
     console.log(contentObject);
 
@@ -426,6 +448,7 @@ export default class Projects extends Component {
 
     let currentRiserObject = this.state.currentRiser;
     let contentObject = this.state.content;
+    let projectObject = this.state.project;
     currentRiserObject.floors.forEach(function(floor, index, array) {
       if(floor.label == label) {
         currentRiserObject.currentFloor = array[index];
@@ -433,10 +456,10 @@ export default class Projects extends Component {
 
     });
 
-    contentObject.currentRiser = currentRiserObject;
+    projectObject.currentRiser = currentRiserObject;
 
     this.setState({
-      content: contentObject
+      content: this.updateContent(projectObject)
     });
   
   }
@@ -468,7 +491,8 @@ export default class Projects extends Component {
     currentRiserObject.currentFloor = currentRiserObject.floors[currentRiserObject.floors.length - 1];
 
     let contentObject = this.state.content;
-    contentObject.risers.forEach(function(riser, index, array) {
+    let projectObject = this.state.project;
+    projectObject.risers.forEach(function(riser, index, array) {
       if(riser.label == currentRiserObject.label) {
         array[index] = currentRiserObject;
       }
@@ -477,7 +501,7 @@ export default class Projects extends Component {
     
 
     this.setState({
-      content: contentObject
+      content: this.updateContent(projectObject)
     });
   }
 
@@ -509,7 +533,8 @@ export default class Projects extends Component {
     currentRiserObject.currentFloor = currentRiserObject.floors[0];
 
     let contentObject = this.state.content;
-    contentObject.risers.forEach(function(riser, index, array) {
+    let projectObject = this.state.project;
+    projectObject.risers.forEach(function(riser, index, array) {
       if(riser.label == currentRiserObject.label) {
         array[index] = currentRiserObject;
 
@@ -518,7 +543,7 @@ export default class Projects extends Component {
 
 
     this.setState({
-      content: contentObject
+      content: this.updateContent(projectObject)
     });
   }
 
@@ -712,6 +737,7 @@ export default class Projects extends Component {
     let fixtureIndex = Array.prototype.indexOf.call(element.parentNode.parentNode.children, element.parentNode);
     console.log(fixtureIndex);
     let contentObject = this.state.content;
+    let projectObject = this.state.project;
     let currentRiserObject = this.state.currentRiser;
 
     currentRiserObject.currentFloor.loadValues.cold -= currentRiserObject.currentFloor.fixtures[fixtureIndex].loadValues.cold;
@@ -729,7 +755,7 @@ export default class Projects extends Component {
       }
     });
 
-    contentObject.risers.forEach(function(riser, index, array) {
+    projectObject.risers.forEach(function(riser, index, array) {
       if(riser.label == currentRiserObject.label) {
         array[index] = currentRiserObject;
       }
@@ -740,7 +766,7 @@ export default class Projects extends Component {
     this.calculateSizes();
 
     this.setState({
-      content: contentObject,
+      content: this.updateContent(projectObject),
       currentRiser: currentRiserObject
     })
 
@@ -756,17 +782,18 @@ export default class Projects extends Component {
   handleRiserDelete = async (e, label) => {
     console.log(label);
 
+    let projectObject = this.state.project;
     let contentObject = this.state.content;
-    contentObject.risers.forEach(function(riser, index, array) {
+    projectObject.risers.forEach(function(riser, index, array) {
       if(riser.label == label) {
         array.splice(index, 1);
       }
     });
 
-    console.log(contentObject.risers);
+    console.log(projectObject.risers);
 
     this.setState({
-      content: contentObject
+      content: this.updateContent(projectObject)
     });
 
     try {
