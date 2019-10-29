@@ -137,7 +137,7 @@ export default class Home extends Component {
             <a className="Menu__button Menu__button--active">
               Dashboard
             </a>
-            <a className="Menu__button">
+            <a className="Menu__button" href="https://github.com/rezdelamasa/riser-sizer-client/blob/master/README.md" target="_blank">
               Help
             </a>
             <a className="Menu__button" href="/settings">

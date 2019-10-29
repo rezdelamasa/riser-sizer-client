@@ -57,12 +57,7 @@ class ToolbarButtonWrapper extends Component {
         >
           <IoIosAdd /><IoIosArrowRoundDown />
         </Button>
-        <Button
-          onClick={this.handlePrintClick}
-          className="toolbar__button toolbar__button--add"
-        >
-          <TiPrinter></TiPrinter>
-        </Button>
+       
         <Button
           onClick={this.handleEnableMultipleEdit}
           className={multipleEditButtonClass}
@@ -75,3 +70,11 @@ class ToolbarButtonWrapper extends Component {
 }
 
 export default ToolbarButtonWrapper;
+
+
+ // <Button
+ //          onClick={this.handlePrintClick}
+ //          className="toolbar__button toolbar__button--add"
+ //        >
+ //          <TiPrinter></TiPrinter>
+ //        </Button>

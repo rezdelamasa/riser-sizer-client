@@ -28,6 +28,7 @@ export default class Projects extends Component {
       showLabelForm: true,
       floorFormInput: "",
       enableMultipleEdit: false,
+      email: ""
     };
 
     this.handleRiserLabelChange = this.handleRiserLabelChange.bind(this);
@@ -42,32 +43,34 @@ export default class Projects extends Component {
     this.enableMultipleEdit     = this.enableMultipleEdit.bind(this);
   }
 
-  async componentDidMount() {
+  async componentWillMount() {
     try {
       let attachmentURL;
       const data = await this.getProject();
-      const { content } = data;
-      console.log(content);
+      const contentObject = data.content;
+      console.log(contentObject);
 
       let url = window.location.href;
       var projectId = url.split("/").pop();
 
       console.log(projectId);
 
-      let project;
-      content.user.projects.forEach(function(p) {
+      let projectObject;
+      let email = contentObject.user.email;
+      contentObject.user.projects.forEach(function(p) {
         if(p.id === projectId) {
-          project = p;
+          projectObject = p;
         }
       });
 
-      console.log(project);
+      console.log(projectObject);
 
       this.setState({
-        project,
-        content,
+        project: projectObject,
+        content: contentObject,
+        email: email
       });
-      console.log(content);
+      console.log(this.state.content.user);
     } catch (e) {
       alert(e);
     }
@@ -875,14 +878,15 @@ export default class Projects extends Component {
           <div className="Projects__Menu">
             <div className="Menu__wrapper">
               <div className="Menu__account">
+                <p className="Menu__name">{this.state.email}</p>
               </div>
               <a className="Menu__button" href="/">
                 Dashboard
               </a>
-              <a className="Menu__button">
+              <a className="Menu__button" href="https://github.com/rezdelamasa/riser-sizer-client/blob/master/README.md" target="_blank">
                 Help
               </a>
-              <a className="Menu__button">
+              <a className="Menu__button" href="/settings">
                 Settings
               </a>
               <a className="Menu__button" onClick={this.props.handleLogout}>

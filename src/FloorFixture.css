@@ -15,7 +15,7 @@
 	width: unset;
 	position: relative;
 	min-height: 120px;
-	margin-top: 20px;
+	margin: 10px;
 }
 
 .fixture--delete {
