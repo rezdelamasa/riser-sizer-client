@@ -15,13 +15,13 @@ const dev = {
 const prod = {
   apiGateway: {
     REGION: "us-east-2",
-    URL: "https://2hxlw9ac0m.execute-api.us-east-2.amazonaws.com/prod"
+    URL: "https://ohjnstaaua.execute-api.us-east-2.amazonaws.com/prod"
   },
   cognito: {
     REGION: "us-east-2",
     USER_POOL_ID: "us-east-2_hlXiA5eJn",
     APP_CLIENT_ID: "4nckfbn7pf5h66l50pc0o2jnpv",
-    IDENTITY_POOL_ID: "us-east-2:170dcec4-1474-45c6-bf3b-29ef8cc74716"
+    IDENTITY_POOL_ID: "us-east-2:4fdceb9b-c851-4236-a74c-201480564d4c"
   },
   STRIPE_KEY: "pk_live_bXlq3TfD1MWe8ADpZ8m4eoPC00WEayiBIz",
 };
