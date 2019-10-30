@@ -19,7 +19,7 @@ const prod = {
   },
   cognito: {
     REGION: "us-east-2",
-    USER_POOL_ID: "us-east-2_mxBBtGq2k",
+    USER_POOL_ID: "us-east-2_hlXiA5eJn",
     APP_CLIENT_ID: "16fjl29g3goflc4m0if9m0u5ja",
     IDENTITY_POOL_ID: "us-east-2:4fdceb9b-c851-4236-a74c-201480564d4c"
   },
