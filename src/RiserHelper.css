@@ -25,10 +25,19 @@
 
 .riser__content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-grow: 1;
   padding: 0 60px 0 20px;
+}
+
+.riser-text__wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-right: 15%;
 }
 
 .riser__text {

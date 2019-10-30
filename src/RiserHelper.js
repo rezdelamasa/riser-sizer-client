@@ -88,24 +88,40 @@ class RiserHelper extends Component {
       riserHotSourceFloor = riser.hotSourceFloor;
     }
 
+    let firstFloor = "N/A";
+    let topFloor = "N/A";
+
+    if(riser.floors.length > 0) {
+      firstFloor = riser.floors[0].label;
+      topFloor = riser.floors[riser.floors.length - 1].label;
+    }
+
+    let coldSourceFloor = "N/A";
+
+    if(riser.coldSourceFloor) {
+      coldSourceFloor = riser.coldSourceFloor;
+    }
+
+    let hotSourceFloor = "N/A";
+
+    if(riser.hotSourceFloor) {
+      hotSourceFloor = riser.hotSourceFloor;
+    }
+
     return (
       <div className="riser-helper">
         <div className="riser__content">
           <div className="riser-text__wrapper">
-            <h1 className="riser__subheading riser__subheading--cold">Cold Floors</h1>
-            <p className="riser__text">{riserBottomColdFloor + " - " + riserTopColdFloor}</p>
+            <h1 className="riser__subheading riser__subheading--cold">Floors</h1>
+            <p className="riser__text">{firstFloor + '-' + topFloor}</p>
           </div>
           <div className="riser-text__wrapper">
             <h1 className="riser__subheading riser__subheading--cold">Cold Source Floor</h1>
-            <p className="riser__text">{ riserColdSourceFloor }</p>
-          </div>
-          <div className="riser-text__wrapper">
-            <h1 className="riser__subheading riser__subheading--hot">Hot Floors</h1>
-            <p className="riser__text">{riserBottomHotFloor + " - " + riserTopHotFloor}</p>
+            <p className="riser__text">{ coldSourceFloor }</p>
           </div>
           <div className="riser-text__wrapper">
             <h1 className="riser__subheading riser__subheading--hot">Hot Source Floor</h1>
-            <p className="riser__text">{ riserHotSourceFloor }</p>
+            <p className="riser__text">{ hotSourceFloor }</p>
           </div>
         </div>
         <div className="riser__button-wrapper">

@@ -128,22 +128,14 @@ export default class NewProject extends Component {
     projectObject.createdAt = Date.now();
     console.log(projectObject.id);
 
-    let user = {
-      projects: []
-    }
-
-    user.projects.push(projectObject);
-
-    console.log(user);
-
     try {
-      let user = await this.user();
-      console.log(user);
-      user.content.user.projects.push(projectObject);
-      console.log(user);
+      let dbUser = await this.user();
+      console.log(dbUser);
+      dbUser.content.user.projects.push(projectObject);
+      console.log(dbUser);
       await this.createProject({
         content: {
-          user: user.content.user
+          user: dbUser.content.user
         }
       });
       console.log(this.state.name);
@@ -159,7 +151,7 @@ export default class NewProject extends Component {
   }
 
   createProject(user) {
-    return API.post("riser-sizer", "/riser-sizer-user-properties", {
+    return API.put("riser-sizer", "/riser-sizer-user-properties", {
       body: user
     });
   }

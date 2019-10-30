@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Auth } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
 import {
   HelpBlock,
   FormGroup,
@@ -67,6 +67,12 @@ export default class Signup extends Component {
     this.setState({ isLoading: false });
   }
 
+  createUser(content) {
+    return API.put("riser-sizer", `/riser-sizer-user-properties`, {
+      body: content
+    });
+  }
+
   handleConfirmationSubmit = async event => {
     event.preventDefault();
 
@@ -75,6 +81,19 @@ export default class Signup extends Component {
     try {
       await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
       await Auth.signIn(this.state.email, this.state.password);
+
+      let contentObject = {
+        projects: [],
+        email: this.state.email
+      }
+
+      this.setState({
+        content: contentObject
+      })
+
+      await this.createUser({
+        content: this.state.content
+      });
 
       this.props.userHasAuthenticated(true);
       this.props.history.push("/");

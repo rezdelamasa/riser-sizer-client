@@ -21,6 +21,19 @@
 	color: #444;
 }
 
+.Settings__subheading {
+	font-weight: bold;
+	color: #4d83fe;
+}
+
+.Settings__description {
+	font-size: 2.4rem;
+	font-style: italic;
+	font-weight: normal;
+	color: #777;
+	margin-top: 20px;	
+}
+
 .Settings form {
 	width: 80%;
 	margin: 0 auto;
@@ -167,11 +180,7 @@ tr:nth-child(even) {
 }
 
 .Features h3 {
-	font-size: 2.4rem;
-	font-style: italic;
-	font-weight: normal;
-	color: #777;
-	margin-top: 20px;
+	
 }
 
 .Features h4 {

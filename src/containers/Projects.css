@@ -43,9 +43,10 @@
 .Menu__account {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	align-items: flex-start;
+	justify-content: center;
+	align-items: center;
 	margin-bottom: 50px;
+	text-align: center;
 }
 
 .Menu__avi {

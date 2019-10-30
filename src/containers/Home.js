@@ -26,6 +26,8 @@ export default class Home extends Component {
 
     try {
       const user = await this.user();
+      console.log(user.content);
+      user.content.user.username = user.content.user.email.substring(0, user.content.user.email.indexOf('@'));
       this.setState({ user: user.content.user });
       console.log(this.state.user);
     } catch (e) {
@@ -46,7 +48,7 @@ export default class Home extends Component {
       (project, i) =>
         i !== 0 &&
            <LinkContainer
-              key={project.projectId}
+              key={project.id}
               to={`/projects/${project.id}`}
             >
               <ListGroupItem header={project.name}>
@@ -132,7 +134,7 @@ export default class Home extends Component {
         <div className="Projects__Menu">
           <div className="Menu__wrapper">
             <div className="Menu__account">
-              <p className="Menu__name">{this.state.user.email}</p>
+              <p className="Menu__name">{this.state.user.username}</p>
             </div>
             <a className="Menu__button Menu__button--active">
               Dashboard

@@ -17,9 +17,7 @@ class RiserList extends Component {
   }
 
   handleWheel(e) {
-    console.log(e.target);
     const item = this.riserListRef.current;
-    console.log(this.riserListRef);
     if(item) {
       if(e.deltaY > 0) {
         item.scrollLeft += 20;
@@ -50,7 +48,6 @@ class RiserList extends Component {
       showLabelForm,
       handleRiserDelete
     } = this.props;
-    console.log(risers);
 
     let list;
 

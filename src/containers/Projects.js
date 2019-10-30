@@ -56,7 +56,7 @@ export default class Projects extends Component {
       console.log(projectId);
 
       let projectObject;
-      let email = contentObject.user.email;
+      let email = contentObject.user.email.substring(0, contentObject.user.email.indexOf('@'));
       contentObject.user.projects.forEach(function(p) {
         if(p.id === projectId) {
           projectObject = p;
@@ -70,7 +70,7 @@ export default class Projects extends Component {
         content: contentObject,
         email: email
       });
-      console.log(this.state.content.user);
+      console.log(this.state.project);
     } catch (e) {
       alert(e);
     }
@@ -177,6 +177,7 @@ export default class Projects extends Component {
   } 
 
   addRiser(project) {
+    console.log(project);
     return API.put("riser-sizer", `/riser-sizer-user-properties`, {
       body: project
     });
@@ -197,26 +198,26 @@ export default class Projects extends Component {
       projectObject.risers = [];
     }
     console.log(projectObject.risers);
-    if(!projectObject.risers[projectObject.risers.length - 1].label) {
-      alert("The previously created riser has not been labelled yet.");
-    } else {
-      projectObject.risers.push(initRiserObject);
-    }
+      if(projectObject.risers.length > 0 && !projectObject.risers[projectObject.risers.length - 1].label) {
+        alert("The previously created riser has not been labelled yet.");
+      } else {
+        projectObject.risers.push(initRiserObject);
+      }
 
-    console.log(contentObject);
+    console.log(projectObject);
 
     this.setState({
-      content: contentObject,
+      content: this.updateContent(projectObject),
       project: projectObject
     });
 
-    // try {
-    //   await this.addRiser({
-    //     content: contentObject
-    //   });
-    // } catch (e) {
-    //   alert(e);
-    // }
+    try {
+      await this.addRiser({
+        content: this.state.content
+      });
+    } catch (e) {
+      alert(e);
+    }
   }
 
   handleEditRiser(e, riserLabel) {

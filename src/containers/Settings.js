@@ -100,27 +100,13 @@ export default class Settings extends Component {
         </div>
         <div className="Settings__content">
           <h1 className="Settings__heading">Settings</h1>
-          <div className="Subscription">
-            <h2 className="Subscription__heading">Subscription</h2>
-            <div className="Subscription__content">
-              <p>You are currently using the FREE version of Riser Sizer. You are limited to 1 project. To use the app without restrictions, please consider upgrading to the BASIC version.</p>
-              <button onClick={this.handleBasicPurchaseClick} className="Subscription__button">Subscribe</button>
-            </div>
-            {this.state.renderBillingForm &&
-              <StripeProvider apiKey={config.STRIPE_KEY}>
-                <Elements>
-                  <BillingForm
-                    cancelPurchase={this.cancelPurchase}
-                    loading={this.state.isLoading}
-                    onSubmit={this.handleFormSubmit}
-                  />
-                </Elements>
-              </StripeProvider>
-            }
+          <div className="Account">
+            <h2 className="Settings__subheading">Account</h2>
+            <h3 className="Settings__description">Account settings like changing passwords will be coming soon.</h3>
           </div>
           <div className="Features">
-            <h2>Features</h2>
-            <h3>All following features are currently in development and will be available as part of a higher subscription tier, Premium.</h3>
+            <h2 className="Settings__subheading">Features</h2>
+            <h3 className="Settings__description">All following features are currently in development and will be coming soon.</h3>
             <ul>
               <li>
                 <h4>Favorite Fixtures</h4>
