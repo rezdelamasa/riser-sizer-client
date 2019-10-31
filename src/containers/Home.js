@@ -27,8 +27,8 @@ export default class Home extends Component {
     try {
       const user = await this.user();
       console.log(user.content);
-      user.content.user.username = user.content.user.email.substring(0, user.content.user.email.indexOf('@'));
-      this.setState({ user: user.content.user });
+      user.content.username = user.content.email.substring(0, user.content.email.indexOf('@'));
+      this.setState({ user: user.content });
       console.log(this.state.user);
     } catch (e) {
       alert(e);
@@ -38,7 +38,7 @@ export default class Home extends Component {
   }
 
   user() {
-    return API.get("riser-sizer", "/riser-sizer-user-properties");
+    return API.get("riser-sizer-api-3", "/riser-sizer-user-properties");
   }
 
 

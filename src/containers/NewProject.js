@@ -131,12 +131,10 @@ export default class NewProject extends Component {
     try {
       let dbUser = await this.user();
       console.log(dbUser);
-      dbUser.content.user.projects.push(projectObject);
+      dbUser.content.projects.push(projectObject);
       console.log(dbUser);
       await this.createProject({
-        content: {
-          user: dbUser.content.user
-        }
+        content: dbUser.content
       });
       console.log(this.state.name);
       this.props.history.push("/");
@@ -147,11 +145,11 @@ export default class NewProject extends Component {
   }
 
   user() {
-    return API.get("riser-sizer", "/riser-sizer-user-properties");
+    return API.get("riser-sizer-api-3", "/riser-sizer-user-properties");
   }
 
   createProject(user) {
-    return API.put("riser-sizer", "/riser-sizer-user-properties", {
+    return API.put("riser-sizer-api-3", "/riser-sizer-user-properties", {
       body: user
     });
   }

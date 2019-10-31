@@ -56,8 +56,8 @@ export default class Projects extends Component {
       console.log(projectId);
 
       let projectObject;
-      let email = contentObject.user.email.substring(0, contentObject.user.email.indexOf('@'));
-      contentObject.user.projects.forEach(function(p) {
+      let email = contentObject.email.substring(0, contentObject.email.indexOf('@'));
+      contentObject.projects.forEach(function(p) {
         if(p.id === projectId) {
           projectObject = p;
         }
@@ -77,7 +77,7 @@ export default class Projects extends Component {
   }
 
   getProject() {
-    return API.get("riser-sizer", `/riser-sizer-user-properties`);
+    return API.get("riser-sizer-api-3", `/riser-sizer-user-properties`);
   }
 
   validateForm() {
@@ -110,7 +110,7 @@ export default class Projects extends Component {
   }
 
   saveNote(project) {
-    return API.put("riser-sizer", `/riser-sizer-user-properties`, {
+    return API.put("riser-sizer-api-3", `/riser-sizer-user-properties`, {
       body: project
     });
   }
@@ -133,10 +133,6 @@ export default class Projects extends Component {
     }
   }
 
-  deleteProject() {
-    return API.del("riser-sizer", `/riser-sizer/${this.props.match.params.id}`);
-  }
-
   handleDelete = async event => {
     event.preventDefault();
 
@@ -152,13 +148,13 @@ export default class Projects extends Component {
 
     let contentObject = this.state.content;
 
-    contentObject.user.projects.forEach(function(project, index, array) {
+    contentObject.projects.forEach(function(project, index, array) {
       if(project.id === projectObject.id) {
         array.splice(index, 1);
       }
     })
 
-    console.log(contentObject.user.projects);
+    console.log(contentObject.projects);
 
     this.setState({ 
       isDeleting: true,
@@ -178,7 +174,7 @@ export default class Projects extends Component {
 
   addRiser(project) {
     console.log(project);
-    return API.put("riser-sizer", `/riser-sizer-user-properties`, {
+    return API.put("riser-sizer-api-3", `/riser-sizer-user-properties`, {
       body: project
     });
   }
@@ -303,7 +299,7 @@ export default class Projects extends Component {
 
     let contentObject = this.state.content;
 
-    contentObject.user.projects.forEach(function(p, index, array) {
+    contentObject.projects.forEach(function(p, index, array) {
       console.log(p);
       if(p.id == project.id) {
         array[index] = project;

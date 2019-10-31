@@ -216,8 +216,6 @@
 .list-group-item {
 	/*width: 20vw;*/
 	flex: 20% 0 1;
-	height: 8vw;
-	max-height: 150px;
 	margin: 0 1.65%;
 	border: none;
 	border-radius: 10px;	

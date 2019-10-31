@@ -68,7 +68,7 @@ export default class Signup extends Component {
   }
 
   createUser(content) {
-    return API.put("riser-sizer", `/riser-sizer-user-properties`, {
+    return API.put("riser-sizer-api-3", `/riser-sizer-user-properties`, {
       body: content
     });
   }

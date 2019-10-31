@@ -1,29 +1,27 @@
 const dev = {
   apiGateway: {
     REGION: "us-east-2",
-    URL: "https://hsp42xehj4.execute-api.us-east-2.amazonaws.com/dev"
+    URL: "https://0e4fqyjre6.execute-api.us-east-2.amazonaws.com/dev"
   },
   cognito: {
     REGION: "us-east-2",
-    USER_POOL_ID: "us-east-2_Rz8fNFYYZ",
-    APP_CLIENT_ID: "7kadb9jlrsmjl1kt1uf4nslq61",
-    IDENTITY_POOL_ID: "us-east-2:f5c414c9-d5b3-4d72-9e80-94680fd70ae3"
+    USER_POOL_ID: "us-east-2_PmFtj8HBF",
+    APP_CLIENT_ID: "361m3frq9av392qgs6jpchahn",
+    IDENTITY_POOL_ID: "us-east-2:055d6573-cfb0-4353-b192-624456daf87a"
   },
-  STRIPE_KEY: "pk_test_kqUUn0aeDLZh8ApHC7KR2Klh00jVqtwMFe",
 };
 
 const prod = {
   apiGateway: {
     REGION: "us-east-2",
-    URL: "https://ohjnstaaua.execute-api.us-east-2.amazonaws.com/prod"
+    URL: "https://76rnmt7w0g.execute-api.us-east-2.amazonaws.com/prod"
   },
   cognito: {
     REGION: "us-east-2",
-    USER_POOL_ID: "us-east-2_mxBBtGq2k",
-    APP_CLIENT_ID: "16fjl29g3goflc4m0if9m0u5ja",
-    IDENTITY_POOL_ID: "us-east-2:4fdceb9b-c851-4236-a74c-201480564d4c"
+    USER_POOL_ID: "us-east-2_sd4IZDFiP",
+    APP_CLIENT_ID: "3l6ec2fbu7kj2vvi72ge7oj77r",
+    IDENTITY_POOL_ID: "us-east-2:b02ee417-6e8d-4e9e-964d-58ce6f19c173"
   },
-  STRIPE_KEY: "pk_live_bXlq3TfD1MWe8ADpZ8m4eoPC00WEayiBIz",
 };
 
 // Default to dev if not set

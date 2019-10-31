@@ -8,6 +8,8 @@ import Amplify from "aws-amplify";
 
 import config from "./config";
 
+console.log(config);
+
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
@@ -19,7 +21,7 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: "riser-sizer",
+        name: "riser-sizer-api-3",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION
       },
